@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #0ea5e9;
+  --color-brand-blue-dark: #0284c7;
+  --color-brand-navy: #0f172a;
+  --color-brand-yellow: #eab308;
+  --color-brand-red: #ef4444;
+  --color-brand-green: #22c55e;
+  
+  /* Google style dark mode colors */
+  --color-bg-dark: #202124;
+  --color-surface-dark: #303134;
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --surface: #f8fafc;
+  --border: #e2e8f0;
+}
+
+.dark {
+  --background: #202124;
+  --foreground: #e8eaed;
+  --surface: #303134;
+  --border: #5f6368;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-panel {
+  background: rgba(48, 49, 52, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Gradients */
+.sky-gradient {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+}
+
+.dark .sky-gradient {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
