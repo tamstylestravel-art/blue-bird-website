@@ -1,0 +1,54 @@
+{
+  "Navigation": {
+    "features": "Features",
+    "download": "Download",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register"
+  },
+  "Hero": {
+    "badge": "Blue Bird Composer is now live",
+    "title1": "Create Videos",
+    "title2": "With Precision",
+    "subtitle": "The ultimate Premiere Pro extension for seamless workflow. Manage your assets, synchronize beats, and generate previews directly within your workspace.",
+    "getStarted": "Get Started Free",
+    "watchDemo": "Watch Demo"
+  },
+  "Features": {
+    "title": "Powerful tools at your fingertips",
+    "subtitle": "Everything you need to organize and edit your media inside Premiere Pro faster than ever before.",
+    "f1Title": "Asset Management",
+    "f1Desc": "Organize your folders, set custom cover arts, and color-code your library directly within the extension panel.",
+    "f2Title": "Audio & Beat Sync",
+    "f2Desc": "Advanced audio waveform preview, precise playback controls, and automatic beat detection for seamless cutting.",
+    "f3Title": "Auto Cut",
+    "f3Desc": "Instantly slice your footage perfectly to the beat. Save hours of tedious manual cutting with our smart algorithm."
+  },
+  "Footer": {
+    "rights": "All rights reserved."
+  },
+  "Auth": {
+    "loginTitle": "Welcome Back",
+    "registerTitle": "Create an Account",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "loginBtn": "Login",
+    "registerBtn": "Register",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "createOne": "Create one",
+    "loginInstead": "Login instead"
+  },
+  "Dashboard": {
+    "overview": "Overview",
+    "download": "Download Plugin",
+    "billing": "Billing",
+    "settings": "Settings",
+    "logout": "Logout",
+    "welcome": "Welcome, ",
+    "status": "Account Status:",
+    "freePlan": "Free Plan",
+    "proPlan": "Pro (Premium)",
+    "notLoggedIn": "Please login first"
+  }
+}
