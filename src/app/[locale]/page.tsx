@@ -1,4 +1,3 @@
-import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
@@ -42,7 +41,6 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
               </div>
               <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">
                 <LanguageSwitcher />
-                <ThemeToggle />
                 <Link href="/login" className="px-4 py-1.5 text-sm font-medium rounded-full bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--color-brand-blue)] hover:text-white transition-colors shadow-md">
                   {tNav("login")}
                 </Link>

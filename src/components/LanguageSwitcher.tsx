@@ -10,8 +10,8 @@ export default function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const toggleLanguage = () => {
-    const nextLocale = locale === 'th' ? 'en' : 'th';
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const nextLocale = e.target.value;
     
     startTransition(() => {
       router.replace(pathname, { locale: nextLocale });
@@ -19,12 +19,14 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <button 
-      onClick={toggleLanguage}
+    <select 
+      value={locale}
+      onChange={handleLanguageChange}
       disabled={isPending}
-      className="px-3 py-1.5 rounded-md glass-panel text-[var(--foreground)] text-sm font-medium hover:bg-[var(--border)] transition-colors border border-[var(--border)]"
+      className="px-3 py-1.5 rounded-md glass-panel text-[var(--foreground)] text-sm font-medium hover:bg-[var(--border)] transition-colors border border-[var(--border)] outline-none focus:ring-2 focus:ring-brand-blue cursor-pointer appearance-none bg-white"
     >
-      {locale === 'th' ? 'EN' : 'TH'}
-    </button>
+      <option value="en">English (EN)</option>
+      <option value="th">ภาษาไทย (TH)</option>
+    </select>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { Download } from "lucide-react";
-import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function DashboardDownload() {
@@ -17,7 +16,6 @@ export default function DashboardDownload() {
         </div>
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <ThemeToggle />
         </div>
       </div>
 

@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
 import { User } from "firebase/auth";
-import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function DashboardOverview() {
@@ -24,7 +23,6 @@ export default function DashboardOverview() {
         </div>
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <ThemeToggle />
         </div>
       </div>
 

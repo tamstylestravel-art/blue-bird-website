@@ -5,7 +5,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter, Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function LoginForm() {
@@ -36,7 +35,6 @@ export default function LoginForm() {
     <div className="min-h-screen flex items-center justify-center p-4 bg-[var(--background)] transition-colors duration-300">
       <div className="absolute top-6 right-6 flex items-center gap-4">
         <LanguageSwitcher />
-        <ThemeToggle />
       </div>
       
       <div className="w-full max-w-md">
