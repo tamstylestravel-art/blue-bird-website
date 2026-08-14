@@ -2,6 +2,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import { routing } from '@/i18n/routing';
+import AuthNav from "@/components/layout/AuthNav";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -25,11 +26,9 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-navy flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-blue/30">
-                B
-              </div>
+              <img src="/images/bird.png" alt="Blue Bird Pictures Studio Logo" className="w-10 h-10 object-contain drop-shadow-md" />
               <span className="font-bold text-xl tracking-tight text-[var(--foreground)]">
-                Blue Bird Studio
+                Blue Bird Pictures Studio
               </span>
             </div>
             
@@ -41,9 +40,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
               </div>
               <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">
                 <LanguageSwitcher />
-                <Link href="/login" className="px-4 py-1.5 text-sm font-medium rounded-full bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--color-brand-blue)] hover:text-white transition-colors shadow-md">
-                  {tNav("login")}
-                </Link>
+                <AuthNav loginText={tNav("login")} dashboardText="Dashboard" />
               </div>
             </div>
           </div>
@@ -51,70 +48,58 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
       </nav>
 
       {/* Hero Section */}
-      <main className="flex-grow pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-16 py-12 lg:py-20">
-            
-            {/* Text Content */}
-            <div className="flex-1 text-center lg:text-left space-y-8 z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--surface)] border border-[var(--border)] shadow-sm">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-brand-blue)] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-brand-blue)]"></span>
-                </span>
-                <span className="text-xs font-medium text-[var(--foreground)]">{tHero("badge")}</span>
-              </div>
-              
-              <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-[var(--foreground)] leading-tight">
-                {tHero("title1")} <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-brand-blue)] to-[var(--color-brand-navy)]">
-                  {tHero("title2")}
-                </span>
-              </h1>
-              
-              <p className="text-lg text-gray-500 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                {tHero("subtitle")}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[var(--color-brand-blue)] text-white font-semibold shadow-lg shadow-brand-blue/30 hover:bg-[var(--color-brand-blue-dark)] transform hover:-translate-y-0.5 transition-all duration-200">
-                  {tHero("getStarted")}
-                </button>
-                <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl glass-panel text-[var(--foreground)] font-semibold hover:bg-[var(--border)] transition-colors duration-200">
-                  {tHero("watchDemo")}
-                </button>
-              </div>
-            </div>
+      <main className="relative flex-grow min-h-screen flex flex-col justify-center overflow-hidden bg-[#6fb5f6]">
+        {/* Layer 1: Background Sky */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" 
+          style={{ backgroundImage: "url('/images/sky-clouds.jpeg')" }}
+        ></div>
+        
+        {/* Layer 2: Floating Assets Image */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center pt-16">
+           <img 
+             src="/images/asset-management.png" 
+             alt="Asset Management" 
+             className="max-w-7xl w-[90vw] md:w-[80vw] lg:w-[70vw] h-auto object-contain animate-[float_6s_ease-in-out_infinite] px-4 drop-shadow-2xl" 
+           />
+        </div>
 
-            {/* Visual/Mockup */}
-            <div className="flex-1 w-full relative hidden lg:block">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[var(--color-brand-blue)]/20 to-transparent blur-3xl rounded-full transform scale-110 -z-10"></div>
-              <div className="relative rounded-2xl glass-panel p-2 shadow-2xl border border-[var(--border)] overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
-                <div className="bg-[var(--bg-dark)] rounded-xl overflow-hidden shadow-inner border border-[#333]">
-                  {/* Mockup Header */}
-                  <div className="flex items-center px-4 py-3 bg-[#1e1e1e] border-b border-[#333]">
-                    <div className="flex gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    </div>
-                    <div className="mx-auto text-xs font-medium text-gray-400">Blue Bird Composer - Workspace</div>
-                  </div>
-                  {/* Mockup Body */}
-                  <div className="h-64 sm:h-80 bg-[#141414] p-6 flex flex-col gap-4">
-                    <div className="h-8 w-3/4 bg-[#2a2a2a] rounded animate-pulse"></div>
-                    <div className="flex gap-4 h-full">
-                      <div className="w-1/3 bg-[#2a2a2a] rounded-lg animate-pulse"></div>
-                      <div className="w-2/3 bg-[#2a2a2a] rounded-lg animate-pulse"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* Layer 3: Foreground Clouds Overlay (Bottom) */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 h-48 bg-gradient-to-t from-[var(--surface)] via-[var(--surface)]/80 to-transparent pointer-events-none"></div>
+      </main>
 
+      {/* Intro Text Section */}
+      <section className="relative z-30 py-24 bg-[var(--surface)] border-b border-[var(--border)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 shadow-sm">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            <span className="text-xs font-semibold tracking-wider text-blue-600 dark:text-blue-400 uppercase drop-shadow-sm">{tHero("badge")}</span>
+          </div>
+          
+          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-[var(--foreground)] leading-tight">
+            {tHero("title1")} <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-brand-blue)] to-cyan-500">
+              {tHero("title2")}
+            </span>
+          </h1>
+          
+          <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed font-medium">
+            {tHero("subtitle")}
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+            <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[var(--color-brand-blue)] text-white font-bold shadow-xl shadow-brand-blue/30 hover:bg-[var(--color-brand-blue-dark)] transform hover:-translate-y-1 transition-all duration-300">
+              {tHero("getStarted")}
+            </button>
+            <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-[var(--foreground)] font-bold hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-all duration-300 shadow-sm">
+              {tHero("watchDemo")}
+            </button>
           </div>
         </div>
-      </main>
+      </section>
 
       {/* Features Section */}
       <section id="features" className="py-20 bg-[var(--surface)] border-t border-[var(--border)]">
@@ -162,8 +147,8 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
       <footer className="bg-[var(--background)] border-t border-[var(--border)] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-brand-blue to-brand-navy flex items-center justify-center text-white font-bold text-xs">B</div>
-            <span className="font-semibold text-sm text-[var(--foreground)]">Blue Bird Studio</span>
+            <img src="/images/bird.png" alt="Blue Bird Pictures Studio Logo" className="w-6 h-6 object-contain" />
+            <span className="font-semibold text-sm text-[var(--foreground)]">Blue Bird Pictures Studio</span>
           </div>
           <p className="text-sm text-gray-400">© 2026 Blue Bird Pictures Studio. {tFoot("rights")}</p>
         </div>

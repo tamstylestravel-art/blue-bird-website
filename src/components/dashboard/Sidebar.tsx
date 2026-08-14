@@ -3,15 +3,23 @@
 import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { Home, Download, CreditCard, Settings, LogOut, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/lib/firebase";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged, User } from "firebase/auth";
 
 export default function Sidebar() {
   const t = useTranslations("Dashboard");
   const pathname = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const navItems = [
     { name: t("overview"), href: "/dashboard", icon: Home },
@@ -37,10 +45,10 @@ export default function Sidebar() {
 
       <div className="p-6 pb-2">
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-tr from-brand-blue to-brand-navy text-white font-bold flex items-center justify-center">
-            B
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden">
+            <img src="/images/bird.png" alt="Logo" className="w-full h-full object-contain" />
           </div>
-          {!collapsed && <span className="font-bold text-lg text-[var(--foreground)] truncate">Blue Bird</span>}
+          {!collapsed && <span className="font-bold text-base text-[var(--foreground)] truncate">Blue Bird Pictures Studio</span>}
         </Link>
       </div>
 
@@ -65,6 +73,30 @@ export default function Sidebar() {
       </nav>
 
       <div className="p-4 border-t border-[var(--border)]">
+        {user && (
+          <div className={`flex items-center gap-3 mb-4 ${collapsed ? "justify-center" : "px-2"}`}>
+            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-[var(--surface)] border-2 border-[var(--color-brand-blue)] flex-shrink-0 shadow-sm">
+              {user.photoURL ? (
+                <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-[var(--foreground)] font-bold text-lg bg-gradient-to-br from-[var(--color-brand-blue)]/10 to-[var(--color-brand-blue)]/30">
+                  {user.displayName ? user.displayName.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase() || "U"}
+                </div>
+              )}
+            </div>
+            {!collapsed && (
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-[var(--foreground)] truncate">
+                  {user.displayName || "Studio Member"}
+                </p>
+                <p className="text-xs text-gray-500 truncate">
+                  {user.email}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
         <button
           onClick={handleLogout}
           className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-red-500 hover:bg-red-500/10 transition-colors group ${collapsed ? "justify-center" : ""}`}
