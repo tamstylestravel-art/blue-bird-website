@@ -32,6 +32,19 @@
     0% { opacity: 0; }
     100% { opacity: 1; }
   }
+
+  --animate-float-soft: float-soft 4s ease-in-out infinite;
+  --animate-shine: shine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+
+  @keyframes float-soft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes shine {
+    0% { transform: translateX(-150%) skewX(-15deg); }
+    100% { transform: translateX(250%) skewX(-15deg); }
+  }
 }
 
 :root {

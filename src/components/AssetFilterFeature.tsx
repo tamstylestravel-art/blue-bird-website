@@ -68,40 +68,40 @@ export default function AssetFilterFeature() {
               <div className="flex justify-center gap-6 sm:gap-10 md:gap-16">
                 
                 {/* Blue - Video */}
-                <div className="flex flex-col items-center gap-4 cursor-pointer group" onClick={() => setBlueOn(!blueOn)}>
+                <button type="button" aria-pressed={blueOn} aria-label="Toggle Video filter" className="flex flex-col items-center gap-4 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-3xl p-1" onClick={() => setBlueOn(!blueOn)}>
                   <div className="relative">
                     <img src={blueOn ? "/images/Blue button-On.png" : "/images/Blue button-Off.png"} alt="Blue Button" className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 object-contain relative z-10 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-all duration-300 brightness-75 group-hover:brightness-125" />
                     {blueOn && <div className="absolute inset-0 bg-blue-500 blur-2xl rounded-full z-0 transition-opacity duration-300 opacity-20 group-hover:opacity-80"></div>}
                   </div>
                   <span className={`text-sm md:text-base font-bold transition-colors duration-300 ${blueOn ? 'text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.8)]' : 'text-gray-600'}`}>วิดีโอ (Video)</span>
-                </div>
+                </button>
 
                 {/* Orange - Images */}
-                <div className="flex flex-col items-center gap-4 cursor-pointer group" onClick={() => setOrangeOn(!orangeOn)}>
+                <button type="button" aria-pressed={orangeOn} aria-label="Toggle Images filter" className="flex flex-col items-center gap-4 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-3xl p-1" onClick={() => setOrangeOn(!orangeOn)}>
                   <div className="relative">
                     <img src={orangeOn ? "/images/Orange button-On.png" : "/images/Orange button-Off.png"} alt="Orange Button" className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 object-contain relative z-10 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-all duration-300 brightness-75 group-hover:brightness-125" />
                     {orangeOn && <div className="absolute inset-0 bg-orange-500 blur-2xl rounded-full z-0 transition-opacity duration-300 opacity-20 group-hover:opacity-80"></div>}
                   </div>
                   <span className={`text-sm md:text-base font-bold transition-colors duration-300 ${orangeOn ? 'text-orange-400 drop-shadow-[0_0_5px_rgba(251,146,60,0.8)]' : 'text-gray-600'}`}>รูปภาพ (Images)</span>
-                </div>
+                </button>
                 
                 {/* Green - Audio */}
-                <div className="flex flex-col items-center gap-4 cursor-pointer group" onClick={() => setGreenOn(!greenOn)}>
+                <button type="button" aria-pressed={greenOn} aria-label="Toggle Audio filter" className="flex flex-col items-center gap-4 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 rounded-3xl p-1" onClick={() => setGreenOn(!greenOn)}>
                   <div className="relative">
                     <img src={greenOn ? "/images/Green button-On.png" : "/images/Green button-Off.png"} alt="Green Button" className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 object-contain relative z-10 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-all duration-300 brightness-75 group-hover:brightness-125" />
                     {greenOn && <div className="absolute inset-0 bg-green-500 blur-2xl rounded-full z-0 transition-opacity duration-300 opacity-20 group-hover:opacity-80"></div>}
                   </div>
                   <span className={`text-sm md:text-base font-bold transition-colors duration-300 ${greenOn ? 'text-green-400 drop-shadow-[0_0_5px_rgba(74,222,128,0.8)]' : 'text-gray-600'}`}>เสียง (Audio)</span>
-                </div>
+                </button>
                 
                 {/* Red - Mogrt */}
-                <div className="flex flex-col items-center gap-4 cursor-pointer group" onClick={() => setRedOn(!redOn)}>
+                <button type="button" aria-pressed={redOn} aria-label="Toggle Mogrt filter" className="flex flex-col items-center gap-4 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-3xl p-1" onClick={() => setRedOn(!redOn)}>
                   <div className="relative">
                     <img src={redOn ? "/images/Red button-On.png" : "/images/Red button-Off.png"} alt="Red Button" className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 object-contain relative z-10 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-all duration-300 brightness-75 group-hover:brightness-125" />
                     {redOn && <div className="absolute inset-0 bg-red-500 blur-2xl rounded-full z-0 transition-opacity duration-300 opacity-20 group-hover:opacity-80"></div>}
                   </div>
                   <span className={`text-sm md:text-base font-bold transition-colors duration-300 ${redOn ? 'text-red-400 drop-shadow-[0_0_5px_rgba(248,113,113,0.8)]' : 'text-gray-600'}`}>โมชัน (Mogrt)</span>
-                </div>
+                </button>
               </div>
             </div>
 

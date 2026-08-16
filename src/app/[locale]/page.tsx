@@ -61,7 +61,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
               </div>
               <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">
                 <LanguageSwitcher />
-                <AuthNav loginText={tNav("login")} dashboardText="Dashboard" />
+                <AuthNav loginText={tNav("login")} signupText={tNav("register")} dashboardText="Dashboard" />
               </div>
             </div>
           </div>
@@ -102,14 +102,18 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
              </p>
              
              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
-               <button className="flex items-center justify-center gap-3 w-full sm:w-[320px] h-[60px] px-6 rounded-xl bg-[#002f6c] text-white font-bold whitespace-nowrap shadow-xl hover:bg-[#0052cc] hover:shadow-[0_10px_25px_rgba(0,82,204,0.4)] hover:brightness-110 transform hover:-translate-y-1 transition-all duration-300 border border-[#0052cc]/30">
-                 <WindowsIcon className="w-6 h-6" />
-                 {tHero("dlWin")}
-               </button>
-               <button className="flex items-center justify-center gap-3 w-full sm:w-[320px] h-[60px] px-6 rounded-xl bg-[#002f6c] text-white font-bold whitespace-nowrap shadow-xl hover:bg-[#0052cc] hover:shadow-[0_10px_25px_rgba(0,82,204,0.4)] hover:brightness-110 transform hover:-translate-y-1 transition-all duration-300 border border-[#0052cc]/30">
-                 <AppleIcon className="w-6 h-6" />
-                 {tHero("dlMac")}
-               </button>
+               <a href="/downloads/BlueBirdComposer_Installer.exe" download className="w-full sm:w-auto">
+                 <button className="flex items-center justify-center gap-3 w-full sm:w-[320px] h-[60px] px-6 rounded-xl bg-[#002f6c] text-white font-bold whitespace-nowrap shadow-xl hover:bg-[#0052cc] hover:shadow-[0_10px_25px_rgba(0,82,204,0.4)] hover:brightness-110 transform hover:-translate-y-1 transition-all duration-300 border border-[#0052cc]/30">
+                   <WindowsIcon className="w-6 h-6" />
+                   {tHero("dlWin")}
+                 </button>
+               </a>
+               <a href="/downloads/BlueBirdComposer.zxp" download className="w-full sm:w-auto">
+                 <button className="flex items-center justify-center gap-3 w-full sm:w-[320px] h-[60px] px-6 rounded-xl bg-[#002f6c] text-white font-bold whitespace-nowrap shadow-xl hover:bg-[#0052cc] hover:shadow-[0_10px_25px_rgba(0,82,204,0.4)] hover:brightness-110 transform hover:-translate-y-1 transition-all duration-300 border border-[#0052cc]/30">
+                   <AppleIcon className="w-6 h-6" />
+                   {tHero("dlMac")}
+                 </button>
+               </a>
              </div>
            </div>
         </div>

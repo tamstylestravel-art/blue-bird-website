@@ -4,10 +4,10 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  output: 'export',
   images: {
     unoptimized: true,
   },
+  serverExternalPackages: ['firebase-admin', 'jwks-rsa', 'jose'],
 };
 
 export default withNextIntl(nextConfig);

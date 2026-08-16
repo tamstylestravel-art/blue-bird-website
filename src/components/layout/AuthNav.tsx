@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 
-export default function AuthNav({ loginText, dashboardText }: { loginText: string; dashboardText: string }) {
+export default function AuthNav({ loginText, signupText, dashboardText }: { loginText: string; signupText: string; dashboardText: string }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -41,8 +41,13 @@ export default function AuthNav({ loginText, dashboardText }: { loginText: strin
   }
 
   return (
-    <Link href="/login" className="px-4 py-1.5 text-sm font-medium rounded-full bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--color-brand-blue)] hover:text-white transition-colors shadow-md">
-      {loginText}
-    </Link>
+    <div className="flex items-center gap-3">
+      <Link href="/login" className="px-4 py-1.5 text-sm font-medium rounded-full bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--color-brand-blue)] hover:text-white transition-colors shadow-md">
+        {loginText}
+      </Link>
+      <Link href="/register" className="px-4 py-1.5 text-sm font-medium rounded-full bg-transparent text-[var(--foreground)] border border-[var(--foreground)] hover:bg-[var(--color-brand-blue)] hover:text-white hover:border-[var(--color-brand-blue)] transition-colors shadow-sm">
+        {signupText}
+      </Link>
+    </div>
   );
 }

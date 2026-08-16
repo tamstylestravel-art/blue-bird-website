@@ -36,8 +36,26 @@
     "registerBtn": "Register",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
-    "createOne": "Create one",
-    "loginInstead": "Login instead"
+    "createOne": "Create one now",
+    "loginInstead": "Login instead",
+    "checkEmailTitle": "Check your email",
+    "checkEmailDesc1": "We have sent a verification link to ",
+    "checkEmailDesc2": ". Please check your inbox (and spam folder) to activate your account.",
+    "unverifiedEmail": "Please verify your email address before logging in.",
+    "forgotPassword": "Forgot password?",
+    "resetTitle": "Reset Password",
+    "resetDesc": "Enter your email to receive a password reset link.",
+    "sendResetBtn": "Send Reset Link",
+    "backToLogin": "Back to login",
+    "resetSuccessTitle": "Check your email",
+    "resetSuccessDesc": "We've sent a password reset link to your email.",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWith": "Or",
+    "rememberMe": "Remember me",
+    "agreeToTerms": "By continuing, you agree to our",
+    "terms": "Terms of Service",
+    "and": "and",
+    "privacy": "Privacy Policy"
   },
   "Dashboard": {
     "overview": "Overview",
@@ -49,6 +67,57 @@
     "status": "Account Status:",
     "freePlan": "Free Plan",
     "proPlan": "Pro (Premium)",
-    "notLoggedIn": "Please login first"
+    "notLoggedIn": "Please login first",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "subscribe": "Subscribe Now",
+    "currentPlan": "Your Current Plan"
+  },
+  "Terms": {
+    "title": "Terms of Service",
+    "back": "Back to Home"
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "back": "Back to Home"
+  },
+  "Cookie": {
+    "title": "Cookie Policy",
+    "description": "We use cookies to improve your experience on our website. By continuing, you agree to our",
+    "accept": "Accept All",
+    "decline": "Decline",
+    "policy": "Terms of Use and Privacy Policy"
+  },
+  "PluginAuth": {
+    "title": "Plugin Authentication",
+    "subtitle": "Sign in to connect your account with the Blue Bird Composer plugin.",
+    "loading": "Processing...",
+    "btn_google": "Continue with Google",
+    "success_title": "Login Successful!",
+    "success_subtitle": "Returning to Adobe Premiere Pro...",
+    "err_missing_callback": "Error: Missing callback URL",
+    "err_get_token": "Failed to generate token for plugin"
+  },
+  "ResetPassword": {
+    "title": "Reset Password",
+    "subtitle": "Please enter your new password below.",
+    "new_password": "New Password",
+    "confirm_password": "Confirm New Password",
+    "save_btn": "Save New Password",
+    "saving": "Saving...",
+    "err_missing_code": "Invalid or expired link. Please request a new password reset link.",
+    "err_match": "Passwords do not match.",
+    "err_length": "Password must be at least 6 characters long.",
+    "success_title": "Password Reset Successfully!",
+    "success_desc": "Your password has been changed successfully.",
+    "back_to_login": "Back to Login"
+  },
+  "Errors": {
+    "invalidCredential": "Invalid email or password",
+    "emailInUse": "This email is already in use",
+    "userNotFound": "User not found",
+    "tooManyRequests": "Too many failed login attempts. Please try again later.",
+    "weakPassword": "Password should be at least 6 characters",
+    "default": "An error occurred. Please try again."
   }
 }

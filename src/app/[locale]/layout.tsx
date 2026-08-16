@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { AuthProvider } from "@/context/AuthContext";
+import CookieConsent from "@/components/CookieConsent";
 
 const kanit = Kanit({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -41,6 +42,7 @@ export default async function RootLayout(props: {
         <AuthProvider>
           <NextIntlClientProvider messages={messages}>
             {children}
+            <CookieConsent />
           </NextIntlClientProvider>
         </AuthProvider>
       </body>
