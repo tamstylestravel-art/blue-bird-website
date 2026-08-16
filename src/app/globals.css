@@ -52,6 +52,29 @@
   --foreground: #171717;
   --surface: #f8fafc;
   --border: #e2e8f0;
+
+  /* Sidebar Light Mode */
+  --sidebar-bg: #f8fafc;
+  --sidebar-border: #e2e8f0;
+  --sidebar-text: #0f172a;
+  --sidebar-text-muted: #64748b;
+  --sidebar-active-bg: rgba(14, 165, 233, 0.1);
+  --sidebar-active-text: #0ea5e9;
+}
+
+.dark {
+  --background: #101114; /* Darker background */
+  --foreground: #e8eaed;
+  --surface: #1e1f23; /* Darker surface */
+  --border: #3c4043;
+
+  /* Sidebar Dark Mode */
+  --sidebar-bg: #1a1b1e;
+  --sidebar-border: #2d3135;
+  --sidebar-text: #e2e8f0;
+  --sidebar-text-muted: #94a3b8;
+  --sidebar-active-bg: rgba(138, 180, 248, 0.1);
+  --sidebar-active-text: #8ab4f8;
 }
 
 body {
@@ -63,9 +86,13 @@ body {
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #f1f5f9; /* Light gray box for light mode */
+  border: 1px solid #e2e8f0;
+}
+
+.dark .glass-panel {
+  background: var(--sidebar-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Gradients */
