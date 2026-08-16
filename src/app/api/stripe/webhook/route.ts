@@ -3,15 +3,9 @@ import Stripe from 'stripe';
 import { getFirestore } from 'firebase-admin/firestore';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2025-02-24.acacia',
+  apiVersion: '2025-02-24.acacia' as any,
 });
 
-// Need to read raw body for Stripe signature verification
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -63,7 +57,7 @@ export async function POST(request: Request) {
     
     else if (event.type === 'invoice.payment_succeeded') {
       const invoice = event.data.object as Stripe.Invoice;
-      const subscriptionId = invoice.subscription as string;
+      const subscriptionId = (invoice as any).subscription as string;
       
       if (subscriptionId) {
         // Find user by subscriptionId and update status
