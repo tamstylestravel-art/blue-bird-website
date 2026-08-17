@@ -8,6 +8,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const tabs = [
     { name: 'Plugin Update', href: '/dashboard/admin/plugin' },
+    { name: 'Release Notes', href: '/dashboard/admin/release-notes' },
   ];
 
   return (

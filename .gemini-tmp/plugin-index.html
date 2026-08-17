@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Blue Bird Composer</title>
+    <!-- Google Fonts: Kanit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="./CSInterface.js"></script>
+    <script>
+        window.GLOBAL_APP_VERSION = "1.0.0";
+        try {
+            const fs = require('fs');
+            const path = require('path');
+            let extPath = unescape(window.location.pathname.replace(/^\//, ''));
+            const pkgPath = path.join(path.dirname(extPath), 'package.json');
+            if (fs.existsSync(pkgPath)) {
+                const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+                if (pkg.version) window.GLOBAL_APP_VERSION = pkg.version;
+            }
+        } catch(e) { console.error(e); }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const whatsNew = document.getElementById('whats-new-version');
+            if (whatsNew) whatsNew.innerText = '🚀 Version ' + window.GLOBAL_APP_VERSION + ' (Latest)';
+        });
+    </script>
+    <script src="./js/i18n.js?v=2"></script>
+    <script src="./js/error-catcher.js"></script>
+    <!-- Prevent Firebase from picking up Node.js require -->
+    <script>
+        if (typeof module === 'object') {
+            window._temp_module = module;
+            module = undefined;
+        }
+    </script>
+    <!-- Firebase SDK -->
+    <script src="./js/vendor/firebase-app-compat.js"></script>
+    <script src="./js/vendor/firebase-auth-compat.js"></script>
+    <script src="./js/vendor/firebase-firestore-compat.js"></script>
+    <script>
+        if (window._temp_module) {
+            module = window._temp_module;
+        }
+    </script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/core-patches.css">
+    <link rel="stylesheet" href="./css/auth.css?v=2">
+</head>
+<body>
+    <!-- Update Modal (Hidden by default) -->
+    <div id="update-modal" class="auth-overlay" style="display: none; z-index: 10000; background: rgba(10,10,10,0.98);">
+        <div class="auth-box" style="width: 380px;">
+            
+            <p id="update-percent" style="font-size: 12px; color: #aaa; margin: 0; text-align: right;">0%</p>
+        </div>
+    </div>
+
+    <!-- Update Prompt Modal (Hidden by default) -->
+    <div id="update-prompt-modal" class="auth-overlay" style="display: none; z-index: 10000; background: rgba(10,10,10,0.95); opacity: 0; transition: opacity 0.3s ease; justify-content: center; align-items: center;">
+        <div class="auth-box" style="width: 420px; text-align: center; padding: 30px 25px;">
+            
+            <h2 class="auth-title" style="color: #fff; margin-bottom: 10px; font-size: 20px;">อัปเดตเวอร์ชันใหม่!</h2>
+            <p id="update-prompt-version" style="color: #0ea5e9; font-size: 16px; font-weight: 500; margin-bottom: 15px;">vX.X.X Available</p>
+            <p class="auth-subtitle" style="margin-bottom: 25px; line-height: 1.5;">ทีมงานได้ปล่อยอัปเดตใหม่เพื่อประสิทธิภาพที่ดีขึ้นและฟีเจอร์ใหม่ๆ คุณต้องการดาวน์โหลดและติดตั้งเดี๋ยวนี้เลยหรือไม่?</p>
+            
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button id="btn-update-skip" style="flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer; font-family: 'Mitr', sans-serif; transition: 0.2s; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);" onmouseover="this.style.background='rgba(245, 158, 11, 0.1)'; this.style.boxShadow='0 0 20px rgba(245, 158, 11, 0.6)'" onmouseout="this.style.background='transparent'; this.style.boxShadow='0 0 15px rgba(245, 158, 11, 0.4)'">เลื่อนอัปเดตไปก่อน</button>
+                <button id="btn-update-now" style="flex: 1; padding: 12px; border-radius: 8px; border: none; background: #0ea5e9; color: #fff; font-weight: 500; cursor: pointer; font-family: 'Mitr', sans-serif; transition: 0.2s; box-shadow: 0 0 15px rgba(14, 165, 233, 0.6);" onmouseover="this.style.background='#0284c7'; this.style.boxShadow='0 0 20px rgba(14, 165, 233, 0.8)'" onmouseout="this.style.background='#0ea5e9'; this.style.boxShadow='0 0 15px rgba(14, 165, 233, 0.6)'">อัปเดตทันที</button>
+            </div>
+        </div>
+    </div>
+    <!-- What's New Modal -->
+    <div id="whats-new-modal" class="auth-overlay" style="display: none; z-index: 10000; background: rgba(10,10,10,0.95); opacity: 0; transition: opacity 0.3s ease; justify-content: center; align-items: center;">
+        <div class="auth-box" style="width: 450px; text-align: left; padding: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 15px;">
+                <h2 style="color: #facc15; margin: 0; display: flex; align-items: center; gap: 10px;">🎁 What's New (อัปเดตล่าสุด)</h2>
+                <button onclick="closeWhatsNew()" style="background: none; border: none; color: #888; cursor: pointer; font-size: 18px;">✕</button>
+            </div>
+            
+            <div style="color: #ddd; font-size: 14px; line-height: 1.6; max-height: 300px; overflow-y: auto; padding-right: 10px;">
+                <div style="margin-bottom: 15px;">
+                    <strong id="whats-new-version" style="color: #0ea5e9;">🚀 Version 1.0.0 (Latest)</strong>
+                    <ul style="margin-top: 5px; padding-left: 20px; color: #bbb;">
+                        <li>เพิ่มกล่องของขวัญสำหรับดูฟีเจอร์ใหม่ 🎁</li>
+                        <li>ปรับปรุงระบบความปลอดภัยขั้นสูง (อุดช่องโหว่ Command Injection และ Firebase)</li>
+                        <li>ล้างโค้ดซ้ำซ้อนในระบบ File System ทำให้ปลั๊กอินเบาขึ้น</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; text-align: center;">
+                <button class="auth-button" onclick="closeWhatsNew()" style="width: 120px;">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Modal -->
+    <div id="auth-modal" class="auth-overlay">
+        <div class="auth-box" style="position: relative;">
+            <select id="auth-lang-selector" onchange="window.i18n.setLanguage(this.value)" style="position: absolute; top: 15px; right: 15px; background: transparent; border: 1px solid #333; color: #888; border-radius: 4px; padding: 2px 5px; font-size: 12px; cursor: pointer; outline: none;">
+                <option value="en">EN</option>
+                <option value="th">TH</option>
+            </select>
+            
+    </div>
+
+    <div id="context-menu" class="contextmenu">
+        <div class="context-item" onclick="showInExplorer()">Show in Explorer</div>
+        <div id="menu-remove-btn" class="context-item" onclick="removeSelectedFolder()">Remove from User Library</div>
+        <div id="menu-set-cover-btn" class="context-item" style="color: #facc15;" onclick="triggerSetCover()">🖼️ ตั้งภาพปกอัลบั้ม (Set Album Cover)</div>
+        <div id="menu-delete-cover-btn" class="context-item" style="color: #ef4444;" onclick="deleteAlbumCover()">🗑️ ลบภาพปกอัลบั้ม</div>
+        <div class="context-divider"></div>
+        <div class="color-picker-row">
+            <div class="color-dot reset" title="Reset Color" onclick="setFolderColor('')"></div>
+            <div class="color-dot" style="background: #ef4444;" onclick="setFolderColor('#ef4444')"></div>
+            <div class="color-dot" style="background: #f59e0b;" onclick="setFolderColor('#f59e0b')"></div>
+            <div class="color-dot" style="background: #eab308;" onclick="setFolderColor('#eab308')"></div>
+            <div class="color-dot" style="background: #22c55e;" onclick="setFolderColor('#22c55e')"></div>
+            <div class="color-dot" style="background: #06b6d4;" onclick="setFolderColor('#06b6d4')"></div>
+            <div class="color-dot" style="background: #3b82f6;" onclick="setFolderColor('#3b82f6')"></div>
+            <div class="color-dot" style="background: #a855f7;" onclick="setFolderColor('#a855f7')"></div>
+            <div class="color-dot" style="background: #ec4899;" onclick="setFolderColor('#ec4899')"></div>
+        </div>
+    </div>
+
+    <div class="workspace">
+        <div class="sidebar" id="sidebar">
+            <div class="brand">
+                <img src="./assets/BLUE-BIRD-PGS01.png" id="brand-logo" alt="Logo">
+            </div>
+            
+            <div style="padding: 5px 15px 5px 15px; display: flex; gap: 8px; align-items: center;">
+                <button id="filter-fav-btn" class="filter-star-btn" onclick="toggleFavFilter()" title="แสดงเฉพาะรายการโปรด">
+                    <span class="star-icon">★</span>
+                </button>
+                <input type="text" id="search" class="search-box" style="flex: 1;" placeholder="🔍 Search" onkeyup="renderGrid()">
+            </div>
+
+            <div class="sidebar-menu" id="folder-list"></div>
+            <button class="add-folder-btn" onclick="openNativePicker()">➕ Add Folder</button>
+        </div>
+
+        <div class="resizer" id="resizer"></div>
+
+        <div class="main-area">
+            
+            <div class="progress-banner" id="progress-banner">
+                <div class="progress-left">Generating Previews</div>
+                <div class="progress-right">
+                    <div class="progress-remaining" id="preview-remaining">0 remaining</div>
+                    <button class="btn-stop" onclick="stopGenerating()">Stop</button>
+                </div>
+            </div>
+            
+            <div id="album-banner-container">
+                <div class="album-banner-content" id="album-banner-content">
+                    <span class="album-banner-placeholder" id="album-banner-placeholder">ALBUM COVER AREA</span>
+                </div>
+            </div>
+
+            <div class="grid-container" id="asset-grid">
+                <p style="grid-column: 1 / -1; text-align: center; color: var(--text-light); margin-top: 40px;">โปรดเลือกโฟลเดอร์จากคลังสื่อ</p>
+            </div>
+
+            <div id="audio-player-panel" class="audio-player-panel">
+                <div class="audio-panel-header">
+                    <div class="audio-controls-left">
+                        <button class="icon-btn" onclick="restartAudio()" title="Restart">
+                            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                        </button>
+                        
+                        <button id="audio-play-btn" class="icon-btn play-main" onclick="togglePlay()" title="Play/Pause">
+                            <svg id="icon-play" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+                            <svg id="icon-pause" viewBox="0 0 24 24" width="22" height="22" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                        
+                        <button id="mute-btn" class="icon-btn" onclick="toggleMute()" title="Mute/Unmute">
+                            <svg id="icon-vol-on" viewBox="0 0 24 24" width="20" height="20"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                            <svg id="icon-vol-off" viewBox="0 0 24 24" width="20" height="20" style="display:none; fill:var(--danger-color);"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                        </button>
+                        
+                        <input type="range" id="volume-slider" class="mini-slider" min="0" max="1" step="0.05" value="0.5" oninput="changeVolume(this.value)">
+                    </div>
+                    <div class="audio-controls-right">
+                        <div class="audio-time">
+                            <div id="audio-current-time" class="audio-time-current">00:00:00</div>
+                            <div id="audio-duration">00:00:00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="audio-waveform-area" id="audio-waveform-area" onclick="seekAudioPanel(event)">
+                    <canvas id="waveform-canvas"></canvas>
+                    <div class="audio-playhead" id="audio-playhead"></div>
+                </div>
+                
+                <div class="audio-panel-footer">
+                    <div class="pitch-control">
+                        <span>Pitch:</span>
+                        <input type="range" id="pitch-slider" class="pitch-slider" min="-12" max="12" step="1" value="0" oninput="changePitch(this.value)">
+                        <span id="pitch-value" style="color:var(--accent-color); width: 25px; text-align: right;">0</span>
+                        <button class="link-btn" style="margin-left: 5px;" onclick="resetPitch()">Reset</button>
+                    </div>
+                    <div class="reverse-control">
+                        <label style="cursor:pointer; display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" id="reverse-checkbox" onchange="toggleReverse()"> Reverse
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <div class="zoom-control">
+            <span class="zoom-icon">🔍</span>
+            <input type="range" class="slim-slider" id="size-slider" min="80" max="400" value="200" oninput="changeGridSize(this.value)">
+        </div>
+
+        <button class="btn-add-main" id="btn-add-selected" disabled onclick="addSelectedToTimeline()">Add to Timeline</button>
+    </div>
+
+    <div id="custom-picker-modal" class="picker-modal">
+        <div class="picker-box">
+            <div class="picker-header">
+                <div style="font-weight: bold; color: var(--accent-color);">เลือกโฟลเดอร์หลักที่คุณต้องการ</div>
+                <div class="path-input-container">
+                    <input type="text" id="custom-path-input" class="path-input-box" placeholder="วางที่อยู่โฟลเดอร์ที่นี่ เช่น G:\VIDEO PRODUCTION">
+                    <button class="path-go-btn" onclick="handlePathGo()">Go</button>
+                </div>
+            </div>
+            <div class="picker-content" id="picker-tree"></div>
+            <div class="picker-footer">
+                <button class="picker-btn cancel" onclick="closeCustomPicker()">Cancel</button>
+                <button class="picker-btn confirm" onclick="confirmCustomPicker()">Select Folder</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-library-dialog" class="dialog-overlay">
+        <div class="dialog-box">
+            <div class="dialog-title" style="color: var(--text-hover); border-bottom: 1px solid var(--border-light);">Add To Library</div>
+            <div class="dialog-text" style="color: var(--text-color);">Where would you like to store the previews?</div>
+            <div class="radio-group">
+                <label class="radio-label" style="color: var(--text-color);"><input type="radio" name="preview_location" value="inside" checked> Inside this folder</label>
+                <label class="radio-label" style="color: var(--text-color);"><input type="radio" name="preview_location" value="cache"> Blue Bird internal cache</label>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn-dialog" style="border: 1px solid var(--text-light); color: var(--text-color);" onclick="document.getElementById('add-library-dialog').style.display='none'">Cancel</button>
+                <button class="btn-dialog primary" style="border: 1px solid var(--accent-color); color: var(--accent-color);" onclick="startGeneratingPreviews()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="album-crop-modal" class="crop-modal-overlay">
+        <div class="crop-box">
+            <div class="crop-header">🖼️ ตั้งค่าภาพปกอัลบั้ม (Album Cover)</div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label class="file-upload-btn">
+                    <input type="file" id="cover-file-input" accept="image/png, image/jpeg" style="display: none;">
+                    <span>📁 เลือกรูปภาพจากเครื่อง...</span>
+                </label>
+                <div style="font-size: 12px; color: var(--text-light);">ขนาดที่แนะนำ: 1000 x 220 px (แนวนอน)</div>
+            </div>
+
+            <div class="crop-area-container" id="crop-area-container">
+                <span id="crop-placeholder" style="color: #666666; font-size: 13px;">ยังไม่ได้เลือกรูปภาพ</span>
+                <img id="crop-image-preview" src="" alt="Preview" draggable="false">
+                <div id="crop-guide" class="crop-guide-window" style="display: none;"></div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 10px; background: #1a1a1a; padding: 6px 15px; border-radius: 4px; border: 1px solid var(--border-light); margin-bottom: 5px;">
+                <span style="font-size: 14px; color: var(--text-light);" title="ซูมภาพ">🔍</span>
+                <input type="range" id="crop-zoom-slider" min="0.1" max="3" step="0.02" value="1" style="flex: 1; cursor: ew-resize;">
+                <button onclick="resetCropView()" style="background: transparent; border: 1px solid var(--input-border); color: var(--text-light); border-radius: 4px; padding: 2px 10px; cursor: pointer; font-size: 12px; font-family: 'Mitr', sans-serif; transition: 0.2s;" onmouseover="this.style.color='#fff'; this.style.borderColor='#0078FF';" onmouseout="this.style.color='var(--text-light)'; this.style.borderColor='var(--input-border)';">🔄 รีเซ็ต</button>
+            </div>
+
+            <div class="crop-controls">
+                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--text-light);">
+                    <input type="checkbox" id="apply-subfolders-checkbox" checked>
+                    ใช้ปกนี้กับโฟลเดอร์ย่อยข้างในด้วย
+                </label>
+                <div style="display: flex; gap: 10px;">
+                    <button class="crop-btn cancel" onclick="closeCoverModal()">ยกเลิก</button>
+                    <button class="crop-btn confirm" onclick="saveAlbumCover()">บันทึกภาพปก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Alert Modal -->
+    <div id="custom-alert-modal" class="dialog-overlay" style="display: none; z-index: 20000; justify-content: center; align-items: center; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);">
+        <div class="dialog-box" style="width: 320px; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); text-align: center; padding: 25px 20px; font-family: 'Mitr', sans-serif;">
+            <div id="custom-alert-icon" style="font-size: 36px; margin-bottom: 15px;">🔔</div>
+            <h3 id="custom-alert-title" style="margin: 0 0 10px 0; color: #fff; font-size: 16px; font-weight: 500;">แจ้งเตือน</h3>
+            <p id="custom-alert-message" style="margin: 0 0 20px 0; color: #aaa; font-size: 13px; line-height: 1.5;"></p>
+            <button onclick="document.getElementById('custom-alert-modal').style.display='none'" style="background: #0ea5e9; color: white; border: none; padding: 8px 30px; border-radius: 20px; font-family: 'Mitr', sans-serif; font-size: 13px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">
+                ตกลง
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        window.showCustomAlert = function(message, type = 'info') {
+            const modal = document.getElementById('custom-alert-modal');
+            const iconObj = document.getElementById('custom-alert-icon');
+            const titleObj = document.getElementById('custom-alert-title');
+            const msgObj = document.getElementById('custom-alert-message');
+            
+            msgObj.innerText = message;
+            
+            if (type === 'success') {
+                iconObj.innerHTML = '<svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+                titleObj.innerText = 'Up to Date';
+                titleObj.style.color = '#fff';
+            } else if (type === 'error') {
+                iconObj.innerHTML = '<svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+                titleObj.innerText = 'Error';
+                titleObj.style.color = '#fff';
+            } else {
+                iconObj.innerHTML = '<svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+                titleObj.innerText = 'Notification';
+                titleObj.style.color = '#fff';
+            }
+            
+            modal.style.display = 'flex';
+        };
+    </script>
+    
+    <!-- Wavesurfer.js for Audio Waveform -->
+    <script src="./node_modules/wavesurfer.js/dist/wavesurfer.min.js"></script>
+    <script src="./node_modules/wavesurfer.js/dist/plugins/regions.min.js"></script>
+    <script src="./node_modules/wavesurfer.js/dist/plugins/timeline.min.js"></script>
+    <script src="./node_modules/wavesurfer.js/dist/plugins/hover.min.js"></script>
+    <script src="./node_modules/wavesurfer.js/dist/plugins/minimap.min.js"></script>
+    
+    <script src="./js/storage.js"></script>
+    <script src="./js/audio-player.js"></script>
+    <script src="./js/file-system.js"></script>
+    <script src="./js/ui-core.js"></script>
+    <script src="./js/premiere-link.js"></script>
+    <script src="./js/theme-manager.js"></script>
+    <script src="./js/media-utils.js"></script>
+    <script src="./js/auto-update.js"></script>
+    <script src="./js/core-init.js?v=2"></script>
+    <script src="./js/auto-cut.js?v=2"></script>
+    <script src="./js/beat-sync.js"></script>
+    <script src="./js/auth.js?v=4"></script>
+</body>
+</html>
+

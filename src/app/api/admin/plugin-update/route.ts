@@ -25,19 +25,18 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { version, downloadUrl } = body;
-
-    if (!version || !downloadUrl) {
-      return NextResponse.json({ error: 'Bad Request: ข้อมูลไม่ครบถ้วน' }, { status: 400 });
-    }
+    const { version, downloadUrl, releaseNotes } = body;
 
     const db = getFirestore();
     const docRef = db.collection('system').doc('plugin_info');
-    await docRef.set({
-      latestVersion: version,
-      downloadUrl: downloadUrl,
-      updatedAt: new Date().toISOString()
-    }, { merge: true });
+    
+    // Build update object based on what is provided
+    const updateData: any = { updatedAt: new Date().toISOString() };
+    if (version) updateData.latestVersion = version;
+    if (downloadUrl) updateData.downloadUrl = downloadUrl;
+    if (releaseNotes) updateData.releaseNotes = releaseNotes;
+
+    await docRef.set(updateData, { merge: true });
 
     return NextResponse.json({ success: true, message: 'บันทึกอัปเดตเรียบร้อยแล้ว' });
 

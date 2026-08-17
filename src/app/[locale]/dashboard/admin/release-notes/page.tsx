@@ -5,17 +5,17 @@ import { auth } from '@/lib/firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { useRouter } from '@/i18n/routing';
 
-export default function AdminPluginUpdatePage() {
+export default function AdminReleaseNotesPage() {
   const router = useRouter();
   
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   
-  const [version, setVersion] = useState('');
-  const [downloadUrl, setDownloadUrl] = useState('https://bluebirdpicturesstudio.com/downloads/update.zip');
+  const [releaseNotes, setReleaseNotes] = useState<{title: string, details: string}[]>([
+    { title: '', details: '' }
+  ]);
   const [status, setStatus] = useState<{type: 'success' | 'error' | 'info', message: string} | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentVersion, setCurrentVersion] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function AdminPluginUpdatePage() {
 
   useEffect(() => {
     if (isAdmin && user) {
-      const fetchCurrentVersion = async () => {
+      const fetchCurrentData = async () => {
         try {
           const idToken = await user.getIdToken();
           const res = await fetch('/api/admin/plugin-update', {
@@ -50,12 +50,8 @@ export default function AdminPluginUpdatePage() {
           });
           if (res.ok) {
             const data = await res.json();
-            if (data.latestVersion) {
-              setCurrentVersion(data.latestVersion);
-              setVersion(data.latestVersion);
-            }
-            if (data.downloadUrl) {
-              setDownloadUrl(data.downloadUrl);
+            if (data.releaseNotes && Array.isArray(data.releaseNotes) && data.releaseNotes.length > 0) {
+              setReleaseNotes(data.releaseNotes);
             }
           }
         } catch (error) {
@@ -64,11 +60,30 @@ export default function AdminPluginUpdatePage() {
           setIsFetching(false);
         }
       };
-      fetchCurrentVersion();
+      fetchCurrentData();
     } else if (isAdmin === false) {
       setIsFetching(false);
     }
   }, [isAdmin, user]);
+
+  const handleNoteChange = (index: number, field: 'title' | 'details', value: string) => {
+    const newNotes = [...releaseNotes];
+    newNotes[index][field] = value;
+    setReleaseNotes(newNotes);
+  };
+
+  const addNote = () => {
+    setReleaseNotes([...releaseNotes, { title: '', details: '' }]);
+  };
+
+  const removeNote = (index: number) => {
+    const newNotes = [...releaseNotes];
+    newNotes.splice(index, 1);
+    if (newNotes.length === 0) {
+      newNotes.push({ title: '', details: '' }); // always keep at least one
+    }
+    setReleaseNotes(newNotes);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,6 +91,9 @@ export default function AdminPluginUpdatePage() {
     
     setIsLoading(true);
     setStatus(null);
+
+    // Filter out empty notes
+    const validNotes = releaseNotes.filter(n => n.title.trim() !== '' || n.details.trim() !== '');
 
     try {
       const idToken = await user.getIdToken();
@@ -86,14 +104,13 @@ export default function AdminPluginUpdatePage() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${idToken}`
         },
-        body: JSON.stringify({ version, downloadUrl })
+        body: JSON.stringify({ releaseNotes: validNotes })
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        setStatus({ type: 'success', message: '🎉 ประกาศอัปเดตเวอร์ชัน ' + version + ' สำเร็จแล้ว! ลูกค้าจะได้รับอัปเดตทันทีที่เปิดปลั๊กอิน' });
-        setCurrentVersion(version); 
+        setStatus({ type: 'success', message: '🎉 บันทึก Release Notes เรียบร้อยแล้ว!' });
       } else {
         setStatus({ type: 'error', message: data.error || 'เกิดข้อผิดพลาด' });
       }
@@ -130,8 +147,14 @@ export default function AdminPluginUpdatePage() {
   return (
     <div className="w-full pt-4 flex justify-center">
       <div className="glass-panel rounded-xl p-6 shadow-sm w-full max-w-3xl">
-        <h2 className="text-xl font-bold mb-1">ปล่อยอัปเดตปลั๊กอิน (Auto-Updater)</h2>
-        <p className="text-sm opacity-70 mb-6">กำหนดเวอร์ชันล่าสุดและลิงก์สำหรับดาวน์โหลดไฟล์ .zxp ใหม่</p>
+        
+        <div className="flex justify-between items-center mb-1">
+          <h2 className="text-xl font-bold">รายละเอียดการอัปเดต (Release Notes)</h2>
+          <button type="button" onClick={addNote} className="bg-[var(--background)] hover:bg-sky-500/10 border border-[var(--border)] text-sm px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+            + เพิ่มหัวข้อ
+          </button>
+        </div>
+        <p className="text-sm opacity-70 mb-6">ระบุหัวข้อและรายละเอียดว่าในแพตช์นี้มีอะไรใหม่บ้าง</p>
 
         {status && (
           <div className={`p-4 rounded-lg mb-6 text-sm font-medium ${
@@ -149,35 +172,42 @@ export default function AdminPluginUpdatePage() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <div className="flex justify-between items-baseline mb-2">
-                <label className="block text-sm font-medium">เลขเวอร์ชันใหม่ (Version)</label>
-                {currentVersion && (
-                  <span className="text-xs font-medium text-sky-500 bg-sky-500/10 px-2 py-1 rounded-full">
-                    ปัจจุบัน: {currentVersion}
-                  </span>
-                )}
-              </div>
-              <input 
-                type="text" 
-                value={version}
-                onChange={(e) => setVersion(e.target.value)}
-                placeholder="เช่น 1.0.1" 
-                className="w-full bg-[var(--background)] border border-[var(--border)] rounded-lg px-4 py-2.5 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
-                required
-              />
-            </div>
+            
+            <div className="space-y-4">
+              {releaseNotes.map((note, idx) => (
+                <div key={idx} className="p-4 bg-[var(--background)] border border-[var(--border)] rounded-xl relative group">
+                  <button 
+                    type="button"
+                    onClick={() => removeNote(idx)}
+                    className="absolute top-3 right-3 text-red-500 opacity-50 hover:opacity-100 transition-opacity"
+                    title="ลบหัวข้อนี้"
+                  >
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                  </button>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">ลิงก์ดาวน์โหลด (URL)</label>
-              <input 
-                type="text" 
-                value={downloadUrl}
-                onChange={(e) => setDownloadUrl(e.target.value)}
-                className="w-full bg-[var(--background)] border border-[var(--border)] rounded-lg px-4 py-2.5 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
-                required
-              />
-              <p className="text-xs opacity-60 mt-2">มักจะไม่ต้องเปลี่ยน ปล่อยไว้แบบนี้ได้เลย</p>
+                  <div className="mb-3 pr-8">
+                    <label className="block text-xs font-semibold mb-1 opacity-70">หัวข้อ (Title)</label>
+                    <input 
+                      type="text" 
+                      value={note.title}
+                      onChange={(e) => handleNoteChange(idx, 'title', e.target.value)}
+                      placeholder="เช่น เพิ่มปลั๊กอินลบเสียงรบกวน, แก้ไขบั๊กอินเทอร์เน็ตหลุด" 
+                      className="w-full bg-transparent border-b border-[var(--border)] focus:border-sky-500 outline-none pb-1 text-sm transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold mb-1 opacity-70">รายละเอียด (Details)</label>
+                    <textarea 
+                      value={note.details}
+                      onChange={(e) => handleNoteChange(idx, 'details', e.target.value)}
+                      rows={3}
+                      placeholder="พิมพ์รายละเอียด (เว้นบรรทัดเพื่อให้แสดงเป็นหลายข้อได้)" 
+                      className="w-full bg-[var(--background)] bg-opacity-50 border border-[var(--border)] rounded-lg px-3 py-2 text-sm outline-none focus:border-sky-500 transition-colors resize-y"
+                    ></textarea>
+                  </div>
+                </div>
+              ))}
             </div>
 
             <button 
@@ -188,7 +218,7 @@ export default function AdminPluginUpdatePage() {
               {isLoading ? (
                 <span className="animate-spin w-5 h-5 border-2 border-white/30 border-t-white rounded-full"></span>
               ) : (
-                'ประกาศอัปเดต'
+                'บันทึกและประกาศอัปเดต'
               )}
             </button>
           </form>
