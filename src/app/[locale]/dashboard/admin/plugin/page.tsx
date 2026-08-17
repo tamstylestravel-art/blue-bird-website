@@ -99,7 +99,8 @@ export default function AdminPluginUpdatePage() {
 
       if (res.ok) {
         setStatus({ type: 'success', message: '🎉 ประกาศอัปเดตเวอร์ชัน ' + version + ' สำเร็จแล้ว! ลูกค้าจะได้รับอัปเดตทันทีที่เปิดปลั๊กอิน' });
-        setVersion('');
+        setCurrentVersion(version); // อัปเดตป้าย ปัจจุบัน ทันที
+        // ไม่ต้อง setVersion('') เพื่อให้เลขยังคาอยู่ในช่อง
       } else {
         setStatus({ type: 'error', message: data.error || 'เกิดข้อผิดพลาด' });
       }
