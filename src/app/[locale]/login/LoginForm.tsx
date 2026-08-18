@@ -36,7 +36,7 @@ export default function LoginForm() {
         throw new Error(t("unverifiedEmail"));
       }
       
-      router.push("/dashboard");
+      router.push(`/dashboard${window.location.search}`);
     } catch (err: any) {
       if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password') {
         setError(tErr("invalidCredential"));
@@ -58,7 +58,7 @@ export default function LoginForm() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      router.push("/dashboard");
+      router.push(`/dashboard${window.location.search}`);
     } catch (err: any) {
       if (err.code === 'auth/popup-closed-by-user') {
         return; // User cancelled

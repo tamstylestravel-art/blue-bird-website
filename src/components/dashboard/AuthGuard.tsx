@@ -13,7 +13,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
-        router.replace("/login");
+        router.replace(`/login${window.location.search}`);
       } else {
         setUser(currentUser);
       }
