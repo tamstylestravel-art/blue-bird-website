@@ -78,13 +78,26 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         
         {/* Layer 2: Content (Image + Text) */}
         <div className="relative z-30 w-full max-w-7xl px-4 flex flex-col items-center justify-center mt-4">
-           {/* Floating Image Wrapper to separate fade-in from float animation */}
-           <div className="opacity-0 animate-fade-in-up w-full flex justify-center mb-6" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
-             <img 
-               src="/images/asset-management.png" 
-               alt="Asset Management" 
-               className="w-[95vw] md:w-[85vw] lg:w-[75vw] max-w-6xl h-auto object-contain animate-[float_6s_ease-in-out_infinite] drop-shadow-2xl" 
-             />
+           <div className="opacity-0 animate-bounce-in-custom w-full flex justify-center mb-6" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
+             <div className="animate-[float_6s_ease-in-out_infinite]" style={{ animationDelay: '1.2s' }}>
+               <div 
+                 className="relative inline-block"
+                 style={{ 
+                   WebkitMaskImage: 'url(/images/BLUE-BIRD-COMPOSER-01.png)', 
+                   WebkitMaskSize: 'contain', 
+                   WebkitMaskRepeat: 'no-repeat', 
+                   WebkitMaskPosition: 'center' 
+                 }}
+               >
+                 <img 
+                   src="/images/BLUE-BIRD-COMPOSER-01.png" 
+                   alt="Blue Bird Composer" 
+                   className="w-[95vw] md:w-[85vw] lg:w-[75vw] max-w-6xl h-auto object-contain drop-shadow-2xl" 
+                 />
+                 {/* Shine Sweep Effect */}
+                 <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent animate-[shine_4s_infinite_1.5s]" />
+               </div>
+             </div>
            </div>
            
            {/* Text Content overlaying the sky */}
