@@ -3,7 +3,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import { routing } from '@/i18n/routing';
 import AuthNav from "@/components/layout/AuthNav";
-import { FaApple, FaWindows } from 'react-icons/fa';
 import InteractiveSkyCanvas from "@/components/InteractiveSkyCanvas";
 import AutoEditFeature from "@/components/AutoEditFeature";
 import AssetFilterFeature from "@/components/AssetFilterFeature";
