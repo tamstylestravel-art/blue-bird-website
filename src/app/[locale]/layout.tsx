@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Kanit } from "next/font/google";
+import { Kanit, K2D } from "next/font/google";
 import "../globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -12,6 +12,13 @@ const kanit = Kanit({
   style: ['normal', 'italic'],
   subsets: ['latin', 'thai'],
   variable: '--font-kanit',
+});
+
+const k2d = K2D({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  subsets: ['latin', 'thai'],
+  variable: '--font-k2d',
 });
 
 export const metadata: Metadata = {
@@ -37,7 +44,7 @@ export default async function RootLayout(props: {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${kanit.variable} ${kanit.className} h-full antialiased`}>
+    <html lang={locale} className={`${kanit.variable} ${k2d.variable} ${kanit.className} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <AuthProvider>
           <NextIntlClientProvider messages={messages}>

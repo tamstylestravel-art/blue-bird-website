@@ -23,10 +23,10 @@ export default function LanguageSwitcher() {
       value={locale}
       onChange={handleLanguageChange}
       disabled={isPending}
-      className="px-3 py-1.5 rounded-md glass-panel text-[var(--foreground)] text-sm font-medium hover:bg-[var(--border)] transition-colors border border-[var(--border)] outline-none focus:ring-2 focus:ring-brand-blue cursor-pointer appearance-none bg-white"
+      className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-md glass-panel text-[var(--foreground)] text-xs sm:text-sm font-medium hover:bg-[var(--border)] transition-colors border border-[var(--border)] outline-none focus:ring-2 focus:ring-brand-blue cursor-pointer appearance-none bg-white"
     >
-      <option value="en">English (EN)</option>
-      <option value="th">ภาษาไทย (TH)</option>
+      <option value="en">EN</option>
+      <option value="th">TH</option>
     </select>
   );
 }

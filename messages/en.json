@@ -10,9 +10,10 @@
     "badge": "Blue Bird Composer is now live",
     "title1": "Give Your Video Editing Wings",
     "title2": "Smooth & Seamless",
-    "subtitle": "End the chaos. Manage your editing assets 10x faster.",
+    "subtitle": "End the chaos. Manage your editing assets <highlight>10x faster</highlight> with smart footage simulation and cloud computing.",
     "dlWin": "Download for Windows",
-    "dlMac": "Download for Mac"
+    "dlMac": "Download for Mac",
+    "downloadFor": "Download for"
   },
   "Features": {
     "title": "Powerful tools at your fingertips",

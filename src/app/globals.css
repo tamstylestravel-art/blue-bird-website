@@ -11,8 +11,20 @@
   /* Google style dark mode colors */
   --color-bg-dark: #202124;
   --color-surface-dark: #303134;
+
+  --color-skybrand-50: #f0f9ff;
+  --color-skybrand-100: #e0f2fe;
+  --color-skybrand-200: #bae6fd;
+  --color-skybrand-300: #7dd3fc;
+  --color-skybrand-400: #38bdf8;
+  --color-skybrand-500: #0284c7;
+  --color-skybrand-600: #0369a1;
+  --color-skybrand-700: #075985;
+  --color-skybrand-800: #0c4a6e;
+  --color-skybrand-900: #0a3651;
   
   --font-sans: var(--font-kanit), system-ui, sans-serif;
+  --font-k2d: var(--font-k2d), system-ui, sans-serif;
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-fade-in-up: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -110,13 +122,17 @@ body {
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: #f1f5f9; /* Light gray box for light mode */
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(64px);
+  -webkit-backdrop-filter: blur(64px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .dark .glass-panel {
-  background: var(--sidebar-bg);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(11, 25, 44, 0.85);
+  backdrop-filter: blur(64px);
+  -webkit-backdrop-filter: blur(64px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Gradients */

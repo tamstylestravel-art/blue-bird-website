@@ -19,7 +19,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
   const t = await getTranslations({ locale, namespace: "Privacy" });
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden" style={{ backgroundImage: "url('/images/User_requesting_cloud.jpeg')" }}>
+    <div className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden" style={{ backgroundImage: "url('/images/User_requesting_cloud.webp')" }}>
       {/* Background Decorators */}
       <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-[var(--color-brand-blue)] rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
       <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-[var(--color-brand-purple)] rounded-full blur-[120px] opacity-20 pointer-events-none"></div>

@@ -3,6 +3,10 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import { routing } from '@/i18n/routing';
 import AuthNav from "@/components/layout/AuthNav";
+import { FaApple, FaWindows } from 'react-icons/fa';
+import InteractiveSkyCanvas from "@/components/InteractiveSkyCanvas";
+import AutoEditFeature from "@/components/AutoEditFeature";
+import AssetFilterFeature from "@/components/AssetFilterFeature";
 
 const WindowsIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="currentColor" height="1em" width="1em" viewBox="0 0 305 305" xmlns="http://www.w3.org/2000/svg">
@@ -18,9 +22,6 @@ const AppleIcon = ({ className }: { className?: string }) => (
     <path d="M57.5708873,7282.19296 C58.2999598,7281.34797 58.7914012,7280.17098 58.6569121,7279 C57.6062792,7279.04 56.3352055,7279.67099 55.5818643,7280.51498 C54.905374,7281.26397 54.3148354,7282.46095 54.4735932,7283.60894 C55.6455696,7283.69593 56.8418148,7283.03894 57.5708873,7282.19296 M60.1989864,7289.62485 C60.2283111,7292.65181 62.9696641,7293.65879 63,7293.67179 C62.9777537,7293.74279 62.562152,7295.10677 61.5560117,7296.51675 C60.6853718,7297.73474 59.7823735,7298.94772 58.3596204,7298.97372 C56.9621472,7298.99872 56.5121648,7298.17973 54.9134635,7298.17973 C53.3157735,7298.17973 52.8162425,7298.94772 51.4935978,7298.99872 C50.1203933,7299.04772 49.0738052,7297.68074 48.197098,7296.46676 C46.4032359,7293.98379 45.0330649,7289.44985 46.8734421,7286.3899 C47.7875635,7284.87092 49.4206455,7283.90793 51.1942837,7283.88393 C52.5422083,7283.85893 53.8153044,7284.75292 54.6394294,7284.75292 C55.4635543,7284.75292 57.0106846,7283.67793 58.6366882,7283.83593 C59.3172232,7283.86293 61.2283842,7284.09893 62.4549652,7285.8199 C62.355868,7285.8789 60.1747177,7287.09489 60.1989864,7289.62485" transform="translate(-46.000000, -7279.000000)" />
   </svg>
 );
-
-import AutoEditFeature from "@/components/AutoEditFeature";
-import AssetFilterFeature from "@/components/AssetFilterFeature";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -40,26 +41,26 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
   return (
     <div className="min-h-screen flex flex-col font-sans transition-colors duration-300">
       {/* Navigation */}
-      <nav className="fixed w-full z-50 glass-panel border-b border-[var(--border)] opacity-0 animate-fade-in">
+      <nav className="fixed w-full z-50 bg-white/75 backdrop-blur-2xl border-b border-[var(--border)] opacity-0 animate-fade-in">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2 sm:gap-3">
               <img src="/images/bird.png" alt="Blue Bird Pictures Studio Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain drop-shadow-md" />
-              <span className="font-bold text-lg sm:text-xl tracking-tight text-[var(--foreground)] hidden sm:block">
+              <span className="font-k2d font-extrabold text-lg sm:text-xl tracking-tight text-[var(--foreground)] hidden sm:block">
                 Blue Bird Pictures Studio
               </span>
-              <span className="font-bold text-lg tracking-tight text-[var(--foreground)] block sm:hidden">
+              <span className="font-k2d font-extrabold text-lg tracking-tight text-[var(--foreground)] block sm:hidden">
                 Blue Bird
               </span>
             </div>
             
-            <div className="flex items-center gap-4 sm:gap-6">
+            <div className="flex items-center gap-2 sm:gap-6">
               <div className="hidden md:flex space-x-6">
                 <a href="#features" className="text-[var(--foreground)] hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("features")}</a>
                 <a href="#download" className="text-[var(--foreground)] hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("download")}</a>
                 <a href="#contact" className="text-[var(--foreground)] hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("contact")}</a>
               </div>
-              <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">
+              <div className="flex items-center gap-1.5 sm:gap-3 border-l border-[var(--border)] pl-2 sm:pl-4">
                 <LanguageSwitcher />
                 <AuthNav loginText={tNav("login")} signupText={tNav("register")} dashboardText="Dashboard" />
               </div>
@@ -69,17 +70,13 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
       </nav>
 
       {/* Hero Section */}
-      <main className="relative flex-grow min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#6fb5f6] pt-24 pb-12">
-        {/* Layer 1: Background Sky */}
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-0 animate-fade-in" 
-          style={{ backgroundImage: "url('/images/sky-clouds.jpeg')" }}
-        ></div>
+      <main className="relative flex-grow min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden pt-20 sm:pt-24 pb-12">
+        <InteractiveSkyCanvas />
         
         {/* Layer 2: Content (Image + Text) */}
-        <div className="relative z-30 w-full max-w-7xl px-4 flex flex-col items-center justify-center mt-4">
-           <div className="opacity-0 animate-bounce-in-custom w-full flex justify-center mb-6" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
-             <div className="animate-[float_6s_ease-in-out_infinite]" style={{ animationDelay: '1.2s' }}>
+        <div className="relative z-30 w-full max-w-7xl px-4 flex flex-col items-center justify-center mt-0 sm:mt-4">
+           <div className="opacity-0 animate-bounce-in-custom w-full flex justify-center mb-4 sm:mb-6" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
+             <div className="animate-[float-soft_6s_ease-in-out_infinite] sm:animate-[float_6s_ease-in-out_infinite]" style={{ animationDelay: '1.2s' }}>
                <div 
                  className="relative inline-block"
                  style={{ 
@@ -102,33 +99,58 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
            
            {/* Text Content overlaying the sky */}
            <div className="text-center space-y-5 opacity-0 animate-fade-in-up z-20" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
-             
-             <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-[#002f6c] drop-shadow-md leading-tight">
-               {tHero("title1")} <br />
-               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0047a5] to-[#0074e4] drop-shadow-sm">
-                 {tHero("title2")}
-               </span>
-             </h1>
-             
-             <p className="text-2xl md:text-4xl text-blue-900/80 font-bold max-w-4xl mx-auto drop-shadow-sm leading-tight">
-               {tHero("subtitle")}
-             </p>
-             
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
-               <a href="/downloads/BlueBirdComposer_Installer.exe" download className="w-full sm:w-auto">
-                 <button className="flex items-center justify-center gap-3 w-full sm:w-[320px] h-[60px] px-6 rounded-xl bg-[#002f6c] text-white font-bold whitespace-nowrap shadow-xl hover:bg-[#0052cc] hover:shadow-[0_10px_25px_rgba(0,82,204,0.4)] hover:brightness-110 transform hover:-translate-y-1 transition-all duration-300 border border-[#0052cc]/30">
-                   <WindowsIcon className="w-6 h-6" />
-                   {tHero("dlWin")}
-                 </button>
-               </a>
-               <a href="/downloads/BlueBirdComposer.zxp" download className="w-full sm:w-auto">
-                 <button className="flex items-center justify-center gap-3 w-full sm:w-[320px] h-[60px] px-6 rounded-xl bg-[#002f6c] text-white font-bold whitespace-nowrap shadow-xl hover:bg-[#0052cc] hover:shadow-[0_10px_25px_rgba(0,82,204,0.4)] hover:brightness-110 transform hover:-translate-y-1 transition-all duration-300 border border-[#0052cc]/30">
-                   <AppleIcon className="w-6 h-6" />
-                   {tHero("dlMac")}
-                 </button>
-               </a>
-             </div>
-           </div>
+              <h1 className="flex flex-col items-center justify-center font-extrabold tracking-tight leading-tight space-y-3 sm:space-y-4">
+                <div className="flex flex-row items-end justify-center flex-wrap gap-2 sm:gap-4 px-2">
+                  {locale === 'th' ? (
+                    <>
+                      <span className="block text-5xl sm:text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-[var(--color-skybrand-900)] to-[var(--color-skybrand-600)] drop-shadow-sm pb-1 sm:pb-2 leading-none">ติดปีก</span>
+                      <span className="block text-2xl sm:text-4xl md:text-5xl text-[var(--color-skybrand-800)] opacity-90 pb-2 sm:pb-4 leading-none">ให้งานตัดต่อของคุณ</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="block text-2xl sm:text-4xl md:text-5xl text-[var(--color-skybrand-800)] opacity-90 pb-2 sm:pb-4 leading-none">Give Your Video Editing</span>
+                      <span className="block text-5xl sm:text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-[var(--color-skybrand-900)] to-[var(--color-skybrand-600)] drop-shadow-sm pb-1 sm:pb-2 leading-none">Wings</span>
+                    </>
+                  )}
+                </div>
+                
+                <div className="mt-2 sm:mt-6 relative inline-block group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-skybrand-400)] to-[var(--color-skybrand-600)] rounded-2xl sm:rounded-3xl transform rotate-1 sm:rotate-2 scale-105 opacity-20 group-hover:rotate-3 group-hover:scale-110 transition-all duration-300"></div>
+                  <div className="relative px-6 py-2 sm:py-4 bg-white/40 backdrop-blur-sm border border-white/50 rounded-2xl sm:rounded-3xl shadow-sm">
+                    <span className="text-3xl sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-skybrand-600)] to-[var(--color-skybrand-900)] font-black italic tracking-widest uppercase pr-2">
+                      {tHero("title2")}
+                    </span>
+                  </div>
+                </div>
+              </h1>
+              
+              <p className="text-base sm:text-xl md:text-2xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
+                {tHero.rich("subtitle", {
+                  highlight: (chunks) => <span className="font-bold text-[var(--color-skybrand-700)] bg-[var(--color-skybrand-100)] px-2 py-0.5 rounded-md mx-1">{chunks}</span>
+                })}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-3 sm:pt-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
+                <a href="/downloads/BlueBirdComposer_Installer.exe" download className="w-full sm:w-auto">
+                  <button className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-[320px] h-[50px] sm:h-[60px] px-4 sm:px-6 rounded-2xl bg-[var(--color-skybrand-900)] text-white text-sm sm:text-base font-bold shadow-xl hover:bg-black hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border border-[var(--color-skybrand-700)]">
+                    <WindowsIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <div className="flex flex-col text-left leading-tight">
+                      <span className="text-[10px] sm:text-xs opacity-80 uppercase tracking-wider text-[var(--color-skybrand-300)]">{tHero("downloadFor")?.split(' ')[0] || 'ดาวน์โหลดเวอร์ชัน'}</span>
+                      <span>{tHero("dlWin")}</span>
+                    </div>
+                  </button>
+                </a>
+                <a href="/downloads/BlueBirdComposer.zxp" download className="w-full sm:w-auto">
+                  <button className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-[320px] h-[50px] sm:h-[60px] px-4 sm:px-6 rounded-2xl bg-[var(--color-skybrand-800)] text-white text-sm sm:text-base font-bold shadow-xl hover:bg-[var(--color-skybrand-900)] hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border border-[var(--color-skybrand-600)]">
+                    <AppleIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <div className="flex flex-col text-left leading-tight">
+                      <span className="text-[10px] sm:text-xs opacity-80 uppercase tracking-wider text-[var(--color-skybrand-200)]">{tHero("downloadFor")?.split(' ')[0] || 'ดาวน์โหลดเวอร์ชัน'}</span>
+                      <span>{tHero("dlMac")}</span>
+                    </div>
+                  </button>
+                </a>
+              </div>
+            </div>
         </div>
 
         {/* Layer 3: Foreground Clouds Overlay (Bottom) */}
@@ -188,7 +210,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <img src="/images/bird.png" alt="Blue Bird Pictures Studio Logo" className="w-6 h-6 object-contain" />
-            <span className="font-semibold text-sm text-[var(--foreground)]">Blue Bird Pictures Studio</span>
+            <span className="font-k2d font-extrabold text-sm text-[var(--foreground)]">Blue Bird Pictures Studio</span>
           </div>
           <p className="text-sm text-gray-400">© 2026 Blue Bird Pictures Studio. {tFoot("rights")}</p>
         </div>

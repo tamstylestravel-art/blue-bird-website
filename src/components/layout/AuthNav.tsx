@@ -41,11 +41,11 @@ export default function AuthNav({ loginText, signupText, dashboardText }: { logi
   }
 
   return (
-    <div className="flex items-center gap-3">
-      <Link href="/login" className="px-4 py-1.5 text-sm font-medium rounded-full bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--color-brand-blue)] hover:text-white transition-colors shadow-md">
+    <div className="flex items-center gap-1.5 sm:gap-3">
+      <Link href="/login" className="px-2.5 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--color-brand-blue)] hover:text-white transition-colors shadow-md whitespace-nowrap">
         {loginText}
       </Link>
-      <Link href="/register" className="px-4 py-1.5 text-sm font-medium rounded-full bg-transparent text-[var(--foreground)] border border-[var(--foreground)] hover:bg-[var(--color-brand-blue)] hover:text-white hover:border-[var(--color-brand-blue)] transition-colors shadow-sm">
+      <Link href="/register" className="px-2.5 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full bg-transparent text-[var(--foreground)] border border-[var(--foreground)] hover:bg-[var(--color-brand-blue)] hover:text-white hover:border-[var(--color-brand-blue)] transition-colors shadow-sm whitespace-nowrap">
         {signupText}
       </Link>
     </div>

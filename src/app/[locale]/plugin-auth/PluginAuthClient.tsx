@@ -137,7 +137,7 @@ export default function PluginAuthClient() {
     <div className="min-h-screen flex items-center justify-center p-4 relative">
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/User_requesting_cloud.jpeg)' }}
+        style={{ backgroundImage: 'url(/images/User_requesting_cloud.webp)' }}
       >
         <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
       </div>

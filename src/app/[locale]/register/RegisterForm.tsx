@@ -79,7 +79,7 @@ export default function RegisterForm() {
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat transition-colors duration-300 relative"
-      style={{ backgroundImage: "url('/images/User_requesting_cloud.jpeg')" }}
+      style={{ backgroundImage: "url('/images/User_requesting_cloud.webp')" }}
     >
       {/* No dark overlay */}
 
