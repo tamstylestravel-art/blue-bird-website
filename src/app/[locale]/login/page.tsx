@@ -6,11 +6,17 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+import { Suspense } from 'react';
+
 export default async function LoginPage(props: { params: Promise<{ locale: string }> }) {
   const { params } = props;
   const { locale } = await params;
   
   setRequestLocale(locale);
 
-  return <LoginForm />;
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <LoginForm />
+    </Suspense>
+  );
 }

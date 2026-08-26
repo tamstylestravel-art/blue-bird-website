@@ -5,6 +5,8 @@ export function generateStaticParams() {
   return [{ locale: "th" }, { locale: "en" }];
 }
 
+import { Suspense } from 'react';
+
 export default function ResetPasswordPage({
   params: { locale },
 }: {
@@ -12,5 +14,9 @@ export default function ResetPasswordPage({
 }) {
   setRequestLocale(locale);
 
-  return <ResetPasswordClient />;
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ResetPasswordClient />
+    </Suspense>
+  );
 }
