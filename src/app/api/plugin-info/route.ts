@@ -30,6 +30,17 @@ export async function GET(request: Request) {
 
     const uid = decodedToken.uid;
     const db = getFirestore();
+    
+    // Server-Side Device Enforcement
+    const deviceId = request.headers.get('x-device-id');
+    if (!deviceId) {
+      return NextResponse.json({ error: 'Forbidden: ไม่พบ Device ID (x-device-id)' }, { status: 403, headers: corsHeaders });
+    }
+    
+    const sessionDoc = await db.collection('users').doc(uid).collection('sessions').doc(deviceId).get();
+    if (!sessionDoc.exists) {
+      return NextResponse.json({ error: 'Forbidden: อุปกรณ์นี้ไม่มีสิทธิ์ใช้งาน (Revoked or Not Registered)' }, { status: 403, headers: corsHeaders });
+    }
 
     // Fetch latest version from system/plugin_info
     const docRef = db.collection('system').doc('plugin_info');

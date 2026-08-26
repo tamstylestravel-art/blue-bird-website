@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { Download } from "lucide-react";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function DashboardDownload() {
   const t = useTranslations("Dashboard");
@@ -13,9 +12,6 @@ export default function DashboardDownload() {
         <div>
           <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("download")}</h1>
           <p className="text-gray-500 mt-2">Get the latest version of Blue Bird Composer for Premiere Pro.</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher />
         </div>
       </div>
 

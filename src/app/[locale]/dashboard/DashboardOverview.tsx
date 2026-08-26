@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { auth } from "@/lib/firebase";
 import { User } from "firebase/auth";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function DashboardOverview() {
   const t = useTranslations("Dashboard");
@@ -44,9 +43,6 @@ export default function DashboardOverview() {
         <div>
           <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("overview")}</h1>
           <p className="text-gray-500 mt-2">{t("welcome")}<span className="font-semibold text-[var(--foreground)]">{user?.email}</span></p>
-        </div>
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher />
         </div>
       </div>
 

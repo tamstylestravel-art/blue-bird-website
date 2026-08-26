@@ -1,25 +1,21 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "light" | "dark";
-
-interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<{ theme: "light" | "dark"; toggleTheme: () => void } | undefined>(undefined);
 
 export function DashboardThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
-  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
-    setMounted(true);
-    const storedTheme = localStorage.getItem("dashboard-theme") as Theme;
-    if (storedTheme === "dark" || storedTheme === "light") {
-      setTheme(storedTheme);
+    const storedTheme = localStorage.getItem("dashboard-theme") || "dark";
+    
+    if (storedTheme === "light") {
+      setTheme("light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
     }
   }, []);
 
@@ -27,11 +23,17 @@ export function DashboardThemeProvider({ children }: { children: React.ReactNode
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("dashboard-theme", newTheme);
+    
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className={`h-full w-full transition-opacity duration-300 ${!mounted ? "opacity-0" : "opacity-100"} ${theme === "dark" ? "dark" : ""}`}>
+      <div className="h-full w-full">
         {children}
       </div>
     </ThemeContext.Provider>

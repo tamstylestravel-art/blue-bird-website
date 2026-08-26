@@ -26,7 +26,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
 
       <div className="max-w-4xl mx-auto relative z-10">
         <Link 
-          href="/" 
+          href="/login" 
           className="inline-flex items-center text-[var(--color-brand-blue)] hover:underline mb-8 transition-all font-medium bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
           </div>
 
           <div className="space-y-8 text-[var(--foreground)] leading-relaxed">
-            <section className="bg-black/5 p-6 rounded-2xl text-center">
+            <section className="bg-black/30 p-6 rounded-2xl text-center">
               <p className="text-lg text-gray-500">
                 ขณะนี้เรากำลังจัดทำนโยบายความเป็นส่วนตัว (Privacy Policy) ฉบับสมบูรณ์<br/>
                 กรุณากลับมาตรวจสอบอีกครั้งในภายหลัง

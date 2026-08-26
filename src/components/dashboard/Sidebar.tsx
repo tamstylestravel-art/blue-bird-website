@@ -1,8 +1,8 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
-import { Home, Download, CreditCard, Settings, LogOut, ChevronLeft, ChevronRight, Shield, Moon, Sun } from "lucide-react";
+import { Home, Download, CreditCard, Settings, LogOut, ChevronLeft, ChevronRight, Shield, Moon, Sun, Monitor, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { auth } from "@/lib/firebase";
 import { signOut, onAuthStateChanged, User } from "firebase/auth";
@@ -12,7 +12,9 @@ export default function Sidebar() {
   const t = useTranslations("Dashboard");
   const pathname = usePathname();
   const router = useRouter();
+  
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   
   // Theme state
@@ -27,6 +29,11 @@ export default function Sidebar() {
     return () => unsubscribe();
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
   const navGroups = [
     {
       title: "Project shortcuts",
@@ -39,6 +46,7 @@ export default function Sidebar() {
       items: [
         { name: t("download"), href: "/dashboard/download", icon: Download },
         { name: t("billing"), href: "/dashboard/billing", icon: CreditCard },
+        { name: t("devices", { defaultMessage: "My Devices" }), href: "/dashboard/devices", icon: Monitor },
         { name: t("settings"), href: "/dashboard/settings", icon: Settings },
       ]
     }
@@ -60,21 +68,59 @@ export default function Sidebar() {
   };
 
   return (
-    <div className={`flex flex-col bg-[var(--sidebar-bg)] border-r border-[var(--sidebar-border)] transition-all duration-300 relative ${collapsed ? "w-20" : "w-64"}`}>
-      {/* Collapse Toggle */}
-      <button 
-        onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-8 bg-[var(--sidebar-bg)] border border-[var(--sidebar-border)] rounded-full p-1 text-[var(--sidebar-text-muted)] hover:text-white hover:bg-[var(--sidebar-border)] transition-colors z-10"
-      >
-        {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-      </button>
+    <>
+      {/* Mobile Header */}
+      <div className="md:hidden fixed top-0 left-0 w-full h-16 bg-[var(--sidebar-bg)] border-b border-[var(--sidebar-border)] z-40 flex items-center justify-between px-4">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-sm">
+            <img src="/images/bird.png" alt="Logo" className="w-full h-full object-contain" />
+          </div>
+          <span className="font-[family-name:var(--font-k2d)] font-black uppercase text-[var(--sidebar-text)] text-[13px] sm:text-[14px] tracking-wide whitespace-nowrap">
+            BLUE BIRD PICTURES STUDIO
+          </span>
+        </Link>
+        <button onClick={() => setMobileOpen(true)} className="p-2 text-[var(--sidebar-text)] bg-[var(--sidebar-border)] rounded-lg">
+          <Menu size={24} />
+        </button>
+      </div>
+
+      {/* Mobile Overlay */}
+      {mobileOpen && (
+        <div className="md:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+      )}
+
+      {/* Sidebar Container */}
+      <div className={`fixed inset-y-0 left-0 z-50 transform md:relative md:translate-x-0 transition-all duration-300 flex flex-col bg-[var(--sidebar-bg)] border-r border-[var(--sidebar-border)] h-full ${
+        mobileOpen ? "translate-x-0" : "-translate-x-full"
+      } ${collapsed ? "md:w-20" : "md:w-64"} w-64 md:flex`}>
+        
+        {/* Mobile Close Button */}
+        <button 
+          onClick={() => setMobileOpen(false)}
+          className="md:hidden absolute top-4 right-4 p-2 text-[var(--sidebar-text-muted)] hover:text-[var(--sidebar-text)] bg-[var(--sidebar-border)] rounded-full z-10"
+        >
+          <X size={20} />
+        </button>
+
+        {/* Collapse Toggle (Desktop only) */}
+        <button 
+          onClick={() => setCollapsed(!collapsed)}
+          className="hidden md:flex absolute -right-3 top-8 bg-[var(--sidebar-bg)] border border-[var(--sidebar-border)] rounded-full p-1 text-[var(--sidebar-text-muted)] hover:text-white hover:bg-[var(--sidebar-border)] transition-colors z-10"
+        >
+          {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+        </button>
 
       <div className="p-6 pb-2">
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden">
+          <div className="flex-shrink-0 w-11 h-11 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-sm">
             <img src="/images/bird.png" alt="Logo" className="w-full h-full object-contain" />
           </div>
-          {!collapsed && <span className="font-bold text-base text-[var(--sidebar-text)] truncate">Blue Bird Pictures Studio</span>}
+          {!collapsed && (
+            <div className="flex flex-col font-[family-name:var(--font-k2d)] font-black uppercase text-[var(--sidebar-text)]">
+              <span className="text-[18px] leading-none tracking-[0.07em]">BLUE BIRD</span>
+              <span className="text-[10.5px] leading-none tracking-[0.06em] mt-[3px] opacity-80">PICTURES STUDIO</span>
+            </div>
+          )}
         </Link>
       </div>
 
@@ -110,14 +156,16 @@ export default function Sidebar() {
 
       <div className="p-4 border-t border-[var(--sidebar-border)] space-y-2">
         {mounted && (
-          <button
-            onClick={toggleTheme}
-            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[var(--sidebar-text-muted)] hover:bg-[var(--sidebar-border)] hover:text-[var(--sidebar-text)] transition-colors ${collapsed ? "justify-center" : ""}`}
-            title={collapsed ? "Toggle Theme" : ""}
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            {!collapsed && <span className="text-sm">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>}
-          </button>
+          <>
+            <button
+              onClick={toggleTheme}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[var(--sidebar-text-muted)] hover:bg-[var(--sidebar-border)] hover:text-[var(--sidebar-text)] transition-colors ${collapsed ? "justify-center" : ""}`}
+              title={collapsed ? "Toggle Theme" : ""}
+            >
+              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              {!collapsed && <span className="text-sm">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>}
+            </button>
+          </>
         )}
 
         {user && (
@@ -151,5 +199,6 @@ export default function Sidebar() {
         </button>
       </div>
     </div>
+    </>
   );
 }

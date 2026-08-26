@@ -31,6 +31,7 @@ export function generateStaticParams() {
 }
 
 import { setRequestLocale } from 'next-intl/server';
+import { SessionProvider } from '@/context/SessionContext';
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
@@ -44,13 +45,15 @@ export default async function RootLayout(props: {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${kanit.variable} ${k2d.variable} ${kanit.className} h-full antialiased`}>
+    <html lang={locale} suppressHydrationWarning className={`dark ${kanit.variable} ${k2d.variable} ${kanit.className} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <AuthProvider>
-          <NextIntlClientProvider messages={messages}>
-            {children}
-            <CookieConsent />
-          </NextIntlClientProvider>
+          <SessionProvider>
+            <NextIntlClientProvider messages={messages}>
+              {children}
+              <CookieConsent />
+            </NextIntlClientProvider>
+          </SessionProvider>
         </AuthProvider>
       </body>
     </html>

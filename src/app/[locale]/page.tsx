@@ -6,6 +6,7 @@ import AuthNav from "@/components/layout/AuthNav";
 import InteractiveSkyCanvas from "@/components/InteractiveSkyCanvas";
 import AutoEditFeature from "@/components/AutoEditFeature";
 import AssetFilterFeature from "@/components/AssetFilterFeature";
+import BasicToolsFeature from "@/components/BasicToolsFeature";
 
 const WindowsIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="currentColor" height="1em" width="1em" viewBox="0 0 305 305" xmlns="http://www.w3.org/2000/svg">
@@ -40,26 +41,26 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
   return (
     <div className="min-h-screen flex flex-col font-sans transition-colors duration-300">
       {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-white/75 backdrop-blur-2xl border-b border-[var(--border)] opacity-0 animate-fade-in">
+      <nav className="fixed w-full z-50 bg-white/75 backdrop-blur-2xl border-b border-gray-200 opacity-0 animate-fade-in">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2 sm:gap-3">
               <img src="/images/bird.png" alt="Blue Bird Pictures Studio Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain drop-shadow-md" />
-              <span className="font-k2d font-extrabold text-lg sm:text-xl tracking-tight text-[var(--foreground)] hidden sm:block">
+              <span className="font-k2d font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 hidden sm:block">
                 Blue Bird Pictures Studio
               </span>
-              <span className="font-k2d font-extrabold text-lg tracking-tight text-[var(--foreground)] block sm:hidden">
+              <span className="font-k2d font-extrabold text-lg tracking-tight text-slate-900 block sm:hidden">
                 Blue Bird
               </span>
             </div>
             
             <div className="flex items-center gap-2 sm:gap-6">
               <div className="hidden md:flex space-x-6">
-                <a href="#features" className="text-[var(--foreground)] hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("features")}</a>
-                <a href="#download" className="text-[var(--foreground)] hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("download")}</a>
-                <a href="#contact" className="text-[var(--foreground)] hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("contact")}</a>
+                <a href="#features" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("features")}</a>
+                <a href="#download" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("download")}</a>
+                <a href="#contact" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("contact")}</a>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-3 border-l border-[var(--border)] pl-2 sm:pl-4">
+              <div className="flex items-center gap-1.5 sm:gap-3 border-l border-gray-200 pl-2 sm:pl-4">
                 <LanguageSwitcher />
                 <AuthNav loginText={tNav("login")} signupText={tNav("register")} dashboardText="Dashboard" />
               </div>
@@ -155,6 +156,9 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         {/* Layer 3: Foreground Clouds Overlay (Bottom) */}
         <div className="absolute bottom-0 left-0 right-0 z-20 h-32 bg-gradient-to-t from-[var(--surface)] via-[var(--surface)]/80 to-transparent pointer-events-none"></div>
       </main>
+
+      {/* Basic Tools Feature Section */}
+      <BasicToolsFeature />
 
       {/* Auto Edit Feature Section */}
       <AutoEditFeature />

@@ -127,7 +127,7 @@ export default function ProfileSettings() {
   if (!user) return <div className="animate-pulse flex space-x-4 p-4"><div className="rounded-full bg-gray-200 h-10 w-10"></div><div className="flex-1 space-y-6 py-1"><div className="h-2 bg-gray-200 rounded"></div></div></div>;
 
   return (
-    <div className="max-w-2xl bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8 shadow-sm relative">
+    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8 shadow-sm relative">
       <h2 className="text-2xl font-bold mb-6 text-[var(--foreground)]">ตั้งค่าโปรไฟล์</h2>
       
       {message && (

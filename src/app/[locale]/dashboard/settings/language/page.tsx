@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
-import ProfileSettings from "@/components/dashboard/ProfileSettings";
+import LanguageSettings from "./LanguageSettings";
 
-export default async function SettingsPage(props: {
+export default async function LanguageSettingsPage(props: {
   params: Promise<{ locale: string }>;
 }) {
   const { params } = props;
@@ -9,5 +9,5 @@ export default async function SettingsPage(props: {
   
   setRequestLocale(locale);
 
-  return <ProfileSettings />;
+  return <LanguageSettings />;
 }
