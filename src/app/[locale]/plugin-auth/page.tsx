@@ -1,9 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import PluginAuthClient from './PluginAuthClient';
 
-export function generateStaticParams() {
-  return [{ locale: 'th' }, { locale: 'en' }];
-}
+export const dynamic = 'force-dynamic';
 
 import { Suspense } from 'react';
 
