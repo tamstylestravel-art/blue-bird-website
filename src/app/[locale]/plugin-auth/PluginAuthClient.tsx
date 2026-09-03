@@ -87,7 +87,7 @@ function AuthContent() {
       <div className="absolute -top-32 -right-32 w-64 h-64 bg-[var(--color-brand-blue)] rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
       
       <Image 
-        src="/images/BLUE-BIRD-PGS.png" 
+        src="/images/BLUE-BIRD-PGS01.png" 
         alt="Blue Bird Logo" 
         width={260} 
         height={80} 
