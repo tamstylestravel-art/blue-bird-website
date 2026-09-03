@@ -42,7 +42,9 @@ function AuthContent() {
           const data = await response.json();
           if (data.customToken) {
             setSuccess(true);
-            window.location.href = `${callbackUrl}?token=${data.customToken}`;
+            setTimeout(() => {
+              window.location.href = `${callbackUrl}?token=${data.customToken}`;
+            }, 1500);
           } else {
             throw new Error(t("err_get_token"));
           }
