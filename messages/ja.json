@@ -1,10 +1,10 @@
 {
   "Navigation": {
-    "features": "Features",
-    "download": "Download",
-    "contact": "Contact",
-    "login": "Login",
-    "register": "Register"
+    "features": "特徴",
+    "download": "ダウンロード",
+    "contact": "お問い合わせ",
+    "login": "ログイン",
+    "register": "登録"
   },
   "Hero": {
     "badge": "Blue Bird Composer is now live",
@@ -29,12 +29,12 @@
     "rights": "All rights reserved."
   },
   "Auth": {
-    "loginTitle": "Welcome Back",
-    "registerTitle": "Create an Account",
-    "emailLabel": "Email",
-    "passwordLabel": "Password",
-    "loginBtn": "Login",
-    "registerBtn": "Register",
+    "loginTitle": "お帰りなさい",
+    "registerTitle": "アカウントを作成",
+    "emailLabel": "メール",
+    "passwordLabel": "パスワード",
+    "loginBtn": "ログイン",
+    "registerBtn": "登録",
     "or": "OR",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
@@ -139,27 +139,27 @@
     "default": "An error occurred. Please try again."
   },
   "Team": {
-    "headerBadge": "Meet the Visionaries",
-    "headerTitle1": "Get to know",
-    "headerTitle2": "Our Team",
-    "headerDesc": "Behind <highlight>Blue Bird Pictures Studio</highlight> is a dedicated group building the best tools to make your editing and asset management easier than ever.",
-    "quote": "We don't just write code; we are building a bridge\nthat merges <highlight>Art and Technology</highlight> into one.",
+    "headerBadge": "ビジョナリーたちのご紹介",
+    "headerTitle1": "私たちの",
+    "headerTitle2": "チーム",
+    "headerDesc": "<highlight>Blue Bird Pictures Studio</highlight> の背後には、動画編集とファイル管理をこれまで以上に簡単にする最高のツールを作成することに専念するグループがいます。",
+    "quote": "私たちは単にコードを書くのではありません。\n<highlight>芸術と技術</highlight>をひとつに結ぶ架け橋を築いているのです。",
     "quoteName": "Kritsakorn Rattanapathumphong",
-    "quoteRole": "Founder & Lead Architect",
-    "philosophyTitle": "Our Philosophy",
+    "quoteRole": "創設者 兼 リードアーキテクト",
+    "philosophyTitle": "私たちの哲学",
     "phil1Title": "Precision",
-    "phil1Desc": "Every line of code and system detail is engineered for maximum accuracy and stability for professionals.",
+    "phil1Desc": "すべてのコード行とシステムの詳細は、専門家向けの最高の精度と安定性のために設計されています。",
     "phil2Title": "Innovation",
-    "phil2Desc": "We constantly push boundaries to create cutting-edge tools that answer the future of media production.",
+    "phil2Desc": "私たちは常に限界を押し広げ、メディア制作の未来に応える最先端のツールを作成します。",
     "phil3Title": "Performance",
-    "phil3Desc": "Performance is key. Our software must run fast, seamless, and never interrupt your creative flow.",
+    "phil3Desc": "パフォーマンスが鍵です。私たちのソフトウェアは、創造的なフローを妨げることなく、高速でシームレスに動作する必要があります。",
     "marquee1": "Core Architecture",
     "marquee2": "Sound Engineering",
     "marquee3": "Film Production",
     "marquee4": "Advanced Coding",
     "marquee5": "Seamless UI",
-    "ctaTitle": "Drive the future with us",
-    "ctaDesc": "Let Blue Bird Composer Pro be a part of your project's success.",
-    "ctaBtn": "Download Plugin (Coming Soon)"
+    "ctaTitle": "私たちと一緒に未来を動かしましょう",
+    "ctaDesc": "Blue Bird Composer Proをあなたのプロジェクトの成功の一部にしてください。",
+    "ctaBtn": "プラグインをダウンロード (近日公開)"
   }
 }

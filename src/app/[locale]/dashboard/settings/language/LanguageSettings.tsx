@@ -22,6 +22,7 @@ export default function LanguageSettings() {
   const languages = [
     { code: "th", name: "ภาษาไทย", description: "Thai" },
     { code: "en", name: "English", description: "English" },
+    { code: "ja", name: "日本語", description: "Japanese" },
   ];
 
   return (

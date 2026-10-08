@@ -137,5 +137,29 @@
     "success_title": "เปลี่ยนรหัสผ่านสำเร็จ!",
     "success_desc": "รหัสผ่านของคุณถูกเปลี่ยนเรียบร้อยแล้ว",
     "back_to_login": "กลับไปหน้าเข้าสู่ระบบ"
+  },
+  "Team": {
+    "headerBadge": "Meet the Visionaries",
+    "headerTitle1": "ทำความรู้จักกับ",
+    "headerTitle2": "ทีมงานของเรา",
+    "headerDesc": "เบื้องหลัง <highlight>Blue Bird Pictures Studio</highlight> คือกลุ่มคนที่มุ่งมั่นสร้างสรรค์เครื่องมือที่ดีที่สุด เพื่อช่วยให้งานตัดต่อและจัดการไฟล์ของคุณง่ายขึ้นกว่าที่เคย",
+    "quote": "เราไม่ได้แค่เขียนโค้ด แต่เรากำลังสร้างสะพาน\nเชื่อมระหว่าง <highlight>ศิลปะและเทคโนโลยี</highlight> ให้เป็นเรื่องเดียวกัน",
+    "quoteName": "Kritsakorn Rattanapathumphong",
+    "quoteRole": "Founder & Lead Architect",
+    "philosophyTitle": "ปรัชญาของเรา",
+    "phil1Title": "Precision",
+    "phil1Desc": "ทุกบรรทัดของโค้ดและทุกรายละเอียดของระบบ ถูกออกแบบมาเพื่อความแม่นยำและเสถียรภาพสูงสุดสำหรับระดับมืออาชีพ",
+    "phil2Title": "Innovation",
+    "phil2Desc": "เราไม่หยุดนิ่งที่จะค้นหาขีดจำกัดใหม่ ๆ เพื่อสร้างเครื่องมือที่ล้ำสมัยและตอบโจทย์อนาคตของการผลิตสื่อ",
+    "phil3Title": "Performance",
+    "phil3Desc": "ประสิทธิภาพคือหัวใจสำคัญ ซอฟต์แวร์ของเราต้องทำงานรวดเร็ว ไร้รอยต่อ และไม่ขัดจังหวะความคิดสร้างสรรค์ของคุณ",
+    "marquee1": "Core Architecture",
+    "marquee2": "Sound Engineering",
+    "marquee3": "Film Production",
+    "marquee4": "Advanced Coding",
+    "marquee5": "Seamless UI",
+    "ctaTitle": "ร่วมขับเคลื่อนอนาคตไปกับเรา",
+    "ctaDesc": "ให้ Blue Bird Composer Pro เป็นส่วนหนึ่งในความสำเร็จของโปรเจกต์คุณ",
+    "ctaBtn": "ดาวน์โหลดปลั๊กอิน (เร็ว ๆ นี้)"
   }
 }

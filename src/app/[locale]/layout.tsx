@@ -32,6 +32,8 @@ export function generateStaticParams() {
 
 import { setRequestLocale } from 'next-intl/server';
 import { SessionProvider } from '@/context/SessionContext';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
@@ -50,7 +52,9 @@ export default async function RootLayout(props: {
         <AuthProvider>
           <SessionProvider>
             <NextIntlClientProvider messages={messages}>
+              <Navbar />
               {children}
+              <Footer />
               <CookieConsent />
             </NextIntlClientProvider>
           </SessionProvider>

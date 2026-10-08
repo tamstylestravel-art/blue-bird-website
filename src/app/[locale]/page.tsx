@@ -1,9 +1,5 @@
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { Link } from '@/i18n/routing';
 import { routing } from '@/i18n/routing';
-import AuthNav from "@/components/layout/AuthNav";
-import InteractiveSkyCanvas from "@/components/InteractiveSkyCanvas";
 import AutoEditFeature from "@/components/AutoEditFeature";
 import AssetFilterFeature from "@/components/AssetFilterFeature";
 import BasicToolsFeature from "@/components/BasicToolsFeature";
@@ -36,42 +32,32 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
   const tNav = await getTranslations("Navigation");
   const tHero = await getTranslations("Hero");
   const tFeat = await getTranslations("Features");
-  const tFoot = await getTranslations("Footer");
 
   return (
-    <div className="min-h-screen flex flex-col font-sans transition-colors duration-300">
+    <div className="min-h-screen flex flex-col font-sans bg-white text-slate-900 transition-colors duration-300">
       {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-white/75 backdrop-blur-2xl border-b border-gray-200 opacity-0 animate-fade-in">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <img src="/images/bird.png" alt="Blue Bird Pictures Studio Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain drop-shadow-md" />
-              <span className="font-k2d font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 hidden sm:block">
-                Blue Bird Pictures Studio
-              </span>
-              <span className="font-k2d font-extrabold text-lg tracking-tight text-slate-900 block sm:hidden">
-                Blue Bird
-              </span>
-            </div>
-            
-            <div className="flex items-center gap-2 sm:gap-6">
-              <div className="hidden md:flex space-x-6">
-                <a href="#features" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("features")}</a>
-                <a href="#download" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("download")}</a>
-                <a href="#contact" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("contact")}</a>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-3 border-l border-gray-200 pl-2 sm:pl-4">
-                <LanguageSwitcher />
-                <AuthNav loginText={tNav("login")} signupText={tNav("register")} dashboardText="Dashboard" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <main className="relative flex-grow min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden pt-20 sm:pt-24 pb-12">
-        <InteractiveSkyCanvas />
+        {/* Clean Minimalist Luxury Light Background */}
+        <div className="absolute inset-0 pointer-events-none -z-10 bg-white overflow-hidden">
+          {/* Subtle modern soft ambient aura behind the logo */}
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[1200px] h-[700px] bg-gradient-to-b from-sky-100/60 via-blue-50/30 to-transparent rounded-full blur-3xl opacity-80 pointer-events-none" />
+          <div className="absolute top-1/4 -left-40 w-[550px] h-[550px] bg-sky-100/35 rounded-full blur-[130px] pointer-events-none" />
+          <div className="absolute top-1/3 -right-40 w-[550px] h-[550px] bg-blue-100/25 rounded-full blur-[130px] pointer-events-none" />
+          
+          {/* High-precision micro-dot grid pattern */}
+          <div 
+            className="absolute inset-0 opacity-[0.45] pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(circle, #cbd5e1 1px, transparent 1px)',
+              backgroundSize: '28px 28px'
+            }}
+          />
+          
+          {/* Soft bottom vignette fading cleanly into the next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+        </div>
         
         {/* Layer 2: Content (Image + Text) */}
         <div className="relative z-30 w-full max-w-7xl px-4 flex flex-col items-center justify-center mt-0 sm:mt-4">
@@ -92,7 +78,10 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                    className="w-[95vw] md:w-[85vw] lg:w-[75vw] max-w-6xl h-auto object-contain drop-shadow-2xl" 
                  />
                  {/* Shine Sweep Effect */}
-                 <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent animate-[shine_4s_infinite_1.5s]" />
+                 <div 
+                   className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent animate-[shine_4s_infinite]" 
+                   style={{ animationDelay: '1.5s', animationFillMode: 'both' }}
+                 />
                </div>
              </div>
            </div>
@@ -153,8 +142,6 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
             </div>
         </div>
 
-        {/* Layer 3: Foreground Clouds Overlay (Bottom) */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 h-32 bg-gradient-to-t from-[var(--surface)] via-[var(--surface)]/80 to-transparent pointer-events-none"></div>
       </main>
 
       {/* Basic Tools Feature Section */}
@@ -167,7 +154,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
       <AssetFilterFeature />
 
       {/* Features Section */}
-      <section id="features" className="relative z-30 py-20 bg-[var(--surface)] border-t border-[var(--border)]">
+      <section id="features" className="relative z-30 py-20 border-t border-[var(--border)]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'both' }}>
             <h2 className="text-3xl font-bold text-[var(--foreground)] mb-4">{tFeat("title")}</h2>
@@ -207,17 +194,6 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-[var(--background)] border-t border-[var(--border)] py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <img src="/images/bird.png" alt="Blue Bird Pictures Studio Logo" className="w-6 h-6 object-contain" />
-            <span className="font-k2d font-extrabold text-sm text-[var(--foreground)]">Blue Bird Pictures Studio</span>
-          </div>
-          <p className="text-sm text-gray-400">© 2026 Blue Bird Pictures Studio. {tFoot("rights")}</p>
-        </div>
-      </footer>
     </div>
   );
 }

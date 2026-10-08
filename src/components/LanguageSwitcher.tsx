@@ -27,6 +27,7 @@ export default function LanguageSwitcher() {
     >
       <option value="en">EN</option>
       <option value="th">TH</option>
+
     </select>
   );
 }
