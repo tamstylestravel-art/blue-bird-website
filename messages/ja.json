@@ -4,7 +4,8 @@
     "download": "ダウンロード",
     "contact": "お問い合わせ",
     "login": "ログイン",
-    "register": "登録"
+    "register": "登録",
+    "team": "チーム"
   },
   "Hero": {
     "badge": "Blue Bird Composer is now live",
@@ -153,13 +154,25 @@
     "phil2Desc": "私たちは常に限界を押し広げ、メディア制作の未来に応える最先端のツールを作成します。",
     "phil3Title": "Performance",
     "phil3Desc": "パフォーマンスが鍵です。私たちのソフトウェアは、創造的なフローを妨げることなく、高速でシームレスに動作する必要があります。",
-    "marquee1": "Core Architecture",
-    "marquee2": "Sound Engineering",
-    "marquee3": "Film Production",
-    "marquee4": "Advanced Coding",
-    "marquee5": "Seamless UI",
-    "ctaTitle": "私たちと一緒に未来を動かしましょう",
-    "ctaDesc": "Blue Bird Composer Proをあなたのプロジェクトの成功の一部にしてください。",
-    "ctaBtn": "プラグインをダウンロード (近日公開)"
+    "marquee1": "コアアーキテクチャ",
+    "marquee2": "サウンドエンジニアリング",
+    "marquee3": "映画製作",
+    "marquee4": "高度なコーディング",
+    "marquee5": "シームレスなUI",
+    "ctaTitle": "ビジョン",
+    "ctaDesc": "\"私たち <strong_highlight>Blue Bird Pictures Studio</strong_highlight> は、<italic_highlight>世界中のクリエイター</italic_highlight>に最高の体験とツールを提供するために、新技術の研究開発を決して止めません。<color_highlight>素晴らしいアイデアには最高のツールがふさわしい</color_highlight> と信じているからです。\"",
+    "ctaBtn": "プラグインをダウンロード (近日公開)",
+    "member1Name1": "クリツァコーン・ラタナパトゥンポン",
+    "member1Name2": "(Kritsakorn Rattanapathumphong)",
+    "member1Role": "創設者、映画プロデューサー、リードアーキテクト（Blue Bird Composer Pro）",
+    "member1Bio": "「映画プロデューサー」と「サウンドエンジニア」を主な役割とするトップクラスのエグゼクティブおよび創設者。無限の技術的スキル（エンジニアリング、コンピュータサイエンス、オーディオシステム、VFX）と創造性を完璧に融合させています。現在、Blue Bird Pictures Studioの「Blue Bird Composer Proのリードアーキテクト」として、最先端のシステムアーキテクチャの設計を指揮しています。GDH、BOXX MUSIC、YUPP、Osotspa、Singha Corporationなどの国家プロジェクトやトップブランドとの豊富なコラボレーション経験を持ち、オンラインマスメディア協会の委員およびプロデューサーも務めており、映画とテクノロジー産業の両方を牽引するリーダーシップを発揮しています。",
+    "member2Name1": "ワイアット・ミッチェル",
+    "member2Name2": "(Wyatt Mitchell)",
+    "member2Role": "共同創設者 兼 コア開発者",
+    "member2Bio": "Blue Bird Pictures Studioの共同創設者であり、非常に熟練したソフトウェア開発者。米国カリフォルニア州を拠点とし、Blue Bird Composer Proプラグインのコアシステムのプログラミングと開発の原動力となっています。コーディングとソフトウェアアーキテクチャの深い専門知識を持つワイアットは、最先端のアイデアを強力で実用的なソフトウェアに変える立役者です。新技術の創造に情熱を注ぎ、オーディオおよび映画制作の基準を次のレベルに引き上げることに専念しています。",
+    "member3Name1": "田中 蓮",
+    "member3Name2": "(Ren Tanaka)",
+    "member3Role": "共同開発者",
+    "member3Bio": "日本の東京から参加した優秀なソフトウェア開発者。Blue Bird Composer Proプラグインの成功を支えるもう一人の重要な「共同開発者」。プログラミングにおける専門知識と日本特有の細やかさにより、技術的ビジョンと複雑な問題解決を完璧に融合させます。すべてのコードが最大のパフォーマンスと安定性を発揮するよう推進し、プロの要件を満たす真のプログラムを実現しています。"
   }
 }

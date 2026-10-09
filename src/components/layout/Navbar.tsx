@@ -3,6 +3,7 @@ import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
 import AuthNav from "@/components/layout/AuthNav";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import MobileMenu from "@/components/layout/MobileMenu";
 
 export default async function Navbar() {
   const tNav = await getTranslations("Navigation");
@@ -26,11 +27,17 @@ export default async function Navbar() {
               <Link href="/#features" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("features")}</Link>
               <Link href="/#download" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("download")}</Link>
               <Link href="/#contact" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("contact")}</Link>
-              <Link href="/team" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">ทีมงาน</Link>
+              <Link href="/team" className="text-slate-800 hover:text-[var(--color-brand-blue)] transition-colors text-sm font-medium">{tNav("team")}</Link>
             </div>
             <div className="flex items-center gap-1.5 sm:gap-3 border-l border-gray-200 pl-2 sm:pl-4">
               <LanguageSwitcher />
               <AuthNav loginText={tNav("login")} signupText={tNav("register")} dashboardText="Dashboard" />
+              <MobileMenu 
+                featuresText={tNav("features")} 
+                downloadText={tNav("download")} 
+                contactText={tNav("contact")} 
+                teamText={tNav("team")} 
+              />
             </div>
           </div>
         </div>

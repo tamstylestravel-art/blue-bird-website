@@ -4,90 +4,124 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Music, Film, Code, Monitor, Target, Lightbulb, Zap } from 'lucide-react';
 
-const teamMembers = [
-  {
-    nameTH: "กฤศกร รัตนปทุมพงส์",
-    nameEN: "(Kritsakorn Rattanapathumphong)",
-    role: "Founder, Film Producer & Lead Architect (Blue Bird Composer Pro)",
-    image: "/images/กฤศกร รัตนปทุมพงส์ KRITSAKORN RATTANAPATHUMPHONG-optimized.webp",
-    bio: "ผู้บริหารและผู้ก่อตั้งระดับแนวหน้า โดยมีบทบาทหลักเป็น 'โปรดิวเซอร์ภาพยนตร์' และ 'ซาวด์เอนจิเนียร์' (Sound Engineer) ผู้ผสมผสานทักษะอันไร้ขีดจำกัดทั้งทางด้านเทคนิค (วิศวกรรม, คอมพิวเตอร์, ระบบเสียง, VFX) และความคิดสร้างสรรค์เข้าด้วยกันอย่างสมบูรณ์แบบ ปัจจุบันเป็นหัวหอกสำคัญในฐานะ 'หัวหน้าทีมสถาปัตยกรรมปลั๊กอิน Blue Bird Composer Pro' ภายใต้ค่าย Blue Bird Pictures Studio ผู้อยู่เบื้องหลังการออกแบบโครงสร้างระบบสุดล้ำสมัย ด้วยประสบการณ์ที่โชกโชนในการร่วมงานกับโปรเจกต์ระดับประเทศและแบรนด์ชั้นนำ อาทิ GDH, BOXX MUSIC, YUPP, โอสถสภา และสิงห์ คอร์เปอเรชั่น นอกจากนี้ยังได้รับเกียรติให้ดำรงตำแหน่งกรรมการและโปรดิวเซอร์ของสมาคมสื่อมวลชนออนไลน์ ซึ่งตอกย้ำถึงความเป็นผู้นำที่พร้อมขับเคลื่อนทั้งวงการภาพยนตร์และเทคโนโลยีไปข้างหน้าอย่างไม่หยุดยั้ง",
-    socials: {
-      github: "#",
-      twitter: "#",
-      linkedin: "#",
-    }
-  },
-  {
-    nameTH: "ไวแอตต์ มิตเชลล์",
-    nameEN: "(Wyatt Mitchell)",
-    role: "Co-Founder & Core Developer",
-    image: "/images/Wyatt Mitchell (ไวแอตต์ มิตเชลล์)-optimized.webp",
-    bio: "นักพัฒนาซอฟต์แวร์ฝีมือฉกาจและผู้ร่วมก่อตั้ง Blue Bird Pictures Studio ผู้เป็นกำลังสำคัญในการเขียนโปรแกรมและพัฒนาระบบหลักของปลั๊กอิน Blue Bird Composer Pro ส่งตรงจากฐานการทำงานที่แคลิฟอร์เนีย ประเทศสหรัฐอเมริกา (California, USA) ด้วยความเชี่ยวชาญด้านการเขียนโค้ดเชิงลึกและสถาปัตยกรรมซอฟต์แวร์ ไวแอตต์คือผู้อยู่เบื้องหลังการแปรเปลี่ยนไอเดียสุดล้ำให้กลายเป็นโปรแกรมที่ทรงพลังและใช้งานได้จริง เขามีความหลงใหลในการสร้างสรรค์เทคโนโลยีใหม่ๆ และมุ่งมั่นที่จะยกระดับมาตรฐานการผลิตงานเสียงและภาพยนตร์ให้ก้าวล้ำไปอีกขั้น",
-    socials: {
-      github: "#",
-      linkedin: "#",
-    }
-  },
-  {
-    nameTH: "เร็น ทานากะ",
-    nameEN: "(Ren Tanaka 蓮 田中)",
-    role: "Co-Developer",
-    image: "/images/เร็น (Ren  蓮) ทานากะ (Tanaka  田中)-optimized.webp",
-    bio: "นักพัฒนาซอฟต์แวร์ฝีมือยอดเยี่ยมส่งตรงจากกรุงโตเกียว ประเทศญี่ปุ่น (Tokyo, Japan) อีกหนึ่ง 'ผู้ร่วมพัฒนา' (Co-Developer) คนสำคัญที่อยู่เบื้องหลังความสำเร็จของปลั๊กอิน Blue Bird Composer Pro ด้วยความเชี่ยวชาญและความละเอียดอ่อนสไตล์ญี่ปุ่นในการเขียนโปรแกรม เร็นได้นำเอาวิสัยทัศน์ทางเทคโนโลยีมาผสมผสานกับการแก้ปัญหาที่ซับซ้อนได้อย่างไร้ที่ติ เขาเป็นกำลังหลักในการผลักดันโค้ดทุกบรรทัดให้โปรแกรมมีประสิทธิภาพสูงสุด และเสถียรพอที่จะตอบโจทย์การใช้งานระดับมืออาชีพอย่างแท้จริง",
-    socials: {
-      github: "#",
-      twitter: "#",
-    }
-  }
-];
+import { useTranslations } from 'next-intl';
 
 export default function TeamPage() {
+  const t = useTranslations("Team");
+  const teamMembers = [
+    {
+      name1: t("member1Name1"),
+      name2: t("member1Name2"),
+      role: t("member1Role"),
+      image: "/images/กฤศกร รัตนปทุมพงส์ KRITSAKORN RATTANAPATHUMPHONG-optimized.webp",
+      bio: t("member1Bio"),
+      socials: {
+        github: "#",
+        twitter: "#",
+        linkedin: "#",
+      }
+    },
+    {
+      name1: t("member2Name1"),
+      name2: t("member2Name2"),
+      role: t("member2Role"),
+      image: "/images/Wyatt Mitchell (ไวแอตต์ มิตเชลล์)-optimized.webp",
+      bio: t("member2Bio"),
+      socials: {
+        github: "#",
+        linkedin: "#",
+      }
+    },
+    {
+      name1: t("member3Name1"),
+      name2: t("member3Name2"),
+      role: t("member3Role"),
+      image: "/images/เร็น (Ren  蓮) ทานากะ (Tanaka  田中)-optimized.webp",
+      bio: t("member3Bio"),
+      socials: {
+        github: "#",
+        twitter: "#",
+      }
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 relative overflow-hidden font-sans">
-      {/* Blurred Background Image (Optimized for performance) */}
+    <div className="min-h-screen text-slate-200 relative overflow-hidden font-sans">
+      
+      {/* 1. Global Fixed Background (The arm). Fully bright. */}
       <div 
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-30 pointer-events-none"
+        className="fixed inset-0 z-[-2] bg-[length:250%_auto] sm:bg-[length:150%_auto] md:bg-cover bg-[65%_bottom] md:bg-center bg-no-repeat pointer-events-none"
         style={{ backgroundImage: `url('/images/bg_optimized.webp')` }}
       />
-      {/* Dark Overlay to make text readable */}
-      <div className="absolute inset-0 z-0 bg-slate-950/80" />
+      
+      {/* 2. Smart Dark Overlay: 
+          - 0 to 100vh: Solid black (Hides arm completely under the hero banner)
+          - 120vh to (Bottom - 60vh): 92% black (Makes text readable, arm is faintly visible)
+          - Bottom 60vh: Fades to transparent (Reveals the arm fully at the bottom of the page)
+      */}
+      <div 
+        className="absolute inset-0 z-[-1] pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(2,6,23,1) 0%, rgba(2,6,23,1) 100vh, rgba(2,6,23,0.92) 120vh, rgba(2,6,23,0.92) calc(100% - 60vh), rgba(2,6,23,0) 100%)'
+        }}
+      />
 
       {/* Background Decorative Elements (Optimized with radial gradients instead of CSS blur) */}
       <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-blue-500/5 to-transparent rounded-full pointer-events-none z-0" />
       <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-500/10 via-cyan-500/5 to-transparent rounded-full pointer-events-none z-0" />
 
-      {/* Main Content */}
-      <main className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+      {/* Top Hero Banner with Integrated Header Content */}
+      <div className="relative w-full min-h-[80vh] md:min-h-[90vh] flex flex-col justify-end pt-32 pb-8 md:pb-12 z-10">
         
-        {/* Header Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-4xl mx-auto mb-10 md:mb-14 relative"
+        {/* Background Layer with Mask to smoothly fade into the page background */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)',
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)'
+          }}
         >
-          {/* Header Glow (Optimized for performance) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-64 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-blue-500/5 to-transparent pointer-events-none rounded-full" />
-          
+          <div 
+            className="absolute inset-0 bg-[length:180%_auto] sm:bg-[length:140%_auto] md:bg-cover bg-[center_top_5%] md:bg-center bg-no-repeat opacity-100"
+            style={{ backgroundImage: `url('/images/team-hero-bg.webp')` }}
+          />
+          {/* Very subtle gradients just to ensure white text has a little contrast, slightly stronger on mobile */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 md:from-slate-950/20 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 md:from-slate-950/50 via-slate-950/30 md:via-slate-950/10 to-transparent" />
+        </div>
+        
+        <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
           <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="mb-4 text-blue-400 text-lg md:text-xl lg:text-2xl font-bold tracking-[0.3em] uppercase drop-shadow-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-2xl md:max-w-3xl mx-auto md:mx-0 text-center md:text-left flex flex-col items-center md:items-start"
           >
-            Meet the Visionaries
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="mb-4 inline-block text-blue-400 text-sm md:text-base font-bold tracking-[0.3em] uppercase drop-shadow-md"
+            >
+              {t("headerBadge")}
+            </motion.div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans mb-6 font-bold text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] leading-[1.1] md:leading-[1.05]">
+              {t("headerTitle1")} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                {t("headerTitle2")}
+              </span>
+            </h1>
+            <p className="mt-6 text-lg md:text-xl lg:text-2xl text-slate-100 leading-relaxed font-medium drop-shadow-[0_3px_5px_rgba(0,0,0,0.9)] max-w-2xl">
+              {t.rich("headerDesc", {
+                highlight: (chunks) => <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 font-bold drop-shadow-sm">{chunks}</span>
+              })}
+            </p>
           </motion.div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-sans mb-2 font-medium drop-shadow-md">
-            ทำความรู้จักกับ <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-              ทีมงานของเรา
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-slate-300 leading-relaxed font-light mt-4 max-w-3xl mx-auto drop-shadow-sm">
-            เบื้องหลัง <span className="text-blue-400 font-medium">Blue Bird Pictures Studio</span> คือกลุ่มคนที่มุ่งมั่นสร้างสรรค์เครื่องมือที่ดีที่สุด เพื่อช่วยให้งานตัดต่อและจัดการไฟล์ของคุณง่ายขึ้นกว่าที่เคย
-          </p>
-        </motion.div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <main className="pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 pt-12 md:pt-16">
 
         {/* Elegant Separator */}
         <div className="w-full max-w-md mx-auto h-[1px] bg-gradient-to-r from-transparent via-blue-500/40 to-transparent mb-12" />
@@ -103,13 +137,15 @@ export default function TeamPage() {
           {/* Quote mark decoration removed per user request */}
           
           <div className="text-center px-4 md:px-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans italic text-slate-200 leading-relaxed drop-shadow-sm mb-8 whitespace-pre-line">
-              เราไม่ได้แค่เขียนโค้ด แต่เรากำลังสร้างสะพาน<br />เชื่อมระหว่าง <span className="text-blue-400 font-normal not-italic">ศิลปะและเทคโนโลยี</span> ให้เป็นเรื่องเดียวกัน
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-sans italic text-slate-200 leading-loose md:leading-relaxed drop-shadow-sm mb-8 whitespace-pre-line">
+              {t.rich("quote", {
+                highlight: (chunks) => <span className="text-blue-400 font-normal not-italic">{chunks}</span>
+              })}
             </h2>
             <div className="flex flex-col items-center justify-center space-y-2">
               <div className="w-12 h-[2px] bg-blue-500 mb-2"></div>
-              <p className="text-lg md:text-xl font-medium text-white">Kritsakorn Rattanapathumphong</p>
-              <p className="text-sm md:text-base text-blue-300/80 uppercase tracking-widest">Founder & Lead Architect</p>
+              <p className="text-lg md:text-xl font-medium text-white">{t("quoteName")}</p>
+              <p className="text-sm md:text-base text-blue-300/80 uppercase tracking-widest">{t("quoteRole")}</p>
             </div>
           </div>
         </motion.div>
@@ -125,8 +161,8 @@ export default function TeamPage() {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="group flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-16"
             >
-              {/* Image Section */}
-              <div className={`w-full md:w-5/12 flex-shrink-0 ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
+              {/* Image Section - Resized for mobile */}
+              <div className={`w-3/4 sm:w-2/3 md:w-5/12 mx-auto md:mx-0 flex-shrink-0 ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl">
                   {/* Image wrapper with animation */}
                   <motion.div 
@@ -147,24 +183,24 @@ export default function TeamPage() {
                 </div>
               </div>
 
-              {/* Text Section */}
-              <div className={`w-full md:w-7/12 pt-4 md:pt-8 ${index % 2 !== 0 ? 'md:order-1' : ''}`}>
-                <div className="flex flex-col h-full">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-2 font-sans drop-shadow-sm">
-                    {member.nameTH}
+              {/* Text Section - Centered on mobile */}
+              <div className={`w-full md:w-7/12 pt-2 md:pt-8 ${index % 2 !== 0 ? 'md:order-1' : ''}`}>
+                <div className="flex flex-col h-full text-center md:text-left items-center md:items-start">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-2 font-sans drop-shadow-sm">
+                    {member.name1}
                   </h2>
-                  <h3 className="text-xl md:text-2xl font-normal text-slate-300 mb-6">
-                    {member.nameEN}
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-normal text-slate-300 mb-6">
+                    {member.name2}
                   </h3>
                   
-                  <div className="flex flex-col gap-3 text-blue-400 mb-8">
+                  <div className="flex flex-col items-center md:items-start gap-3 text-blue-400 mb-6 md:mb-8">
                     <span className="h-[2px] w-12 bg-blue-500 block"></span>
-                    <p className="text-sm md:text-base font-medium tracking-widest uppercase">
+                    <p className="text-xs sm:text-sm md:text-base font-medium tracking-[0.2em] uppercase">
                       {member.role}
                     </p>
                   </div>
                   
-                  <p className="text-slate-400 leading-relaxed text-base md:text-lg lg:text-xl font-light drop-shadow-sm indent-8 md:indent-10 text-left">
+                  <p className="text-slate-300 leading-loose text-sm sm:text-base md:text-lg lg:text-xl font-light drop-shadow-sm max-w-lg md:max-w-none mx-auto md:mx-0">
                     {member.bio}
                   </p>
                 </div>
@@ -183,7 +219,7 @@ export default function TeamPage() {
         >
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl text-blue-400 font-semibold tracking-wide mb-8 drop-shadow-sm">
-              ปรัชญาของเรา
+              {t("philosophyTitle")}
             </h2>
           </div>
           
@@ -193,8 +229,8 @@ export default function TeamPage() {
               <div className="w-16 h-16 rounded-full bg-slate-900 border border-slate-700/50 flex items-center justify-center mb-6 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
                 <Target size={28} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-medium text-white mb-4 tracking-wide">Precision</h3>
-              <p className="text-slate-400 font-light leading-relaxed">ทุกบรรทัดของโค้ดและทุกรายละเอียดของระบบ ถูกออกแบบมาเพื่อความแม่นยำและเสถียรภาพสูงสุดสำหรับระดับมืออาชีพ</p>
+              <h3 className="text-xl font-medium text-white mb-4 tracking-wide">{t("phil1Title")}</h3>
+              <p className="text-slate-400 font-light leading-relaxed">{t("phil1Desc")}</p>
             </div>
             
             {/* Phil 2 */}
@@ -202,8 +238,8 @@ export default function TeamPage() {
               <div className="w-16 h-16 rounded-full bg-slate-900 border border-slate-700/50 flex items-center justify-center mb-6 text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.15)]">
                 <Lightbulb size={28} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-medium text-white mb-4 tracking-wide">Innovation</h3>
-              <p className="text-slate-400 font-light leading-relaxed">เราไม่หยุดนิ่งที่จะค้นหาขีดจำกัดใหม่ ๆ เพื่อสร้างเครื่องมือที่ล้ำสมัยและตอบโจทย์อนาคตของการผลิตสื่อ</p>
+              <h3 className="text-xl font-medium text-white mb-4 tracking-wide">{t("phil2Title")}</h3>
+              <p className="text-slate-400 font-light leading-relaxed">{t("phil2Desc")}</p>
             </div>
             
             {/* Phil 3 */}
@@ -211,8 +247,8 @@ export default function TeamPage() {
               <div className="w-16 h-16 rounded-full bg-slate-900 border border-slate-700/50 flex items-center justify-center mb-6 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
                 <Zap size={28} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-medium text-white mb-4 tracking-wide">Performance</h3>
-              <p className="text-slate-400 font-light leading-relaxed">ประสิทธิภาพคือหัวใจสำคัญ ซอฟต์แวร์ของเราต้องทำงานรวดเร็ว ไร้รอยต่อ และไม่ขัดจังหวะความคิดสร้างสรรค์ของคุณ</p>
+              <h3 className="text-xl font-medium text-white mb-4 tracking-wide">{t("phil3Title")}</h3>
+              <p className="text-slate-400 font-light leading-relaxed">{t("phil3Desc")}</p>
             </div>
           </div>
         </motion.div>
@@ -230,15 +266,15 @@ export default function TeamPage() {
             {/* Duplicate content to create seamless loop */}
             {[...Array(2)].map((_, i) => (
               <React.Fragment key={i}>
-                <span>Core Architecture</span>
+                <span>{t("marquee1")}</span>
                 <span className="w-2 h-2 rounded-full bg-blue-500/20"></span>
-                <span>Sound Engineering</span>
+                <span>{t("marquee2")}</span>
                 <span className="w-2 h-2 rounded-full bg-blue-500/20"></span>
-                <span>Film Production</span>
+                <span>{t("marquee3")}</span>
                 <span className="w-2 h-2 rounded-full bg-blue-500/20"></span>
-                <span>Advanced Coding</span>
+                <span>{t("marquee4")}</span>
                 <span className="w-2 h-2 rounded-full bg-blue-500/20"></span>
-                <span>Seamless UI</span>
+                <span>{t("marquee5")}</span>
                 <span className="w-2 h-2 rounded-full bg-blue-500/20"></span>
               </React.Fragment>
             ))}
@@ -262,10 +298,14 @@ export default function TeamPage() {
           
           <div className="relative px-6 py-16 md:py-20 md:px-16 text-center z-10 flex flex-col justify-center min-h-[300px]">
             <h2 className="text-3xl md:text-4xl text-blue-400 font-semibold tracking-wide mb-8 md:mb-10 drop-shadow-sm">
-              วิสัยทัศน์
+              {t("ctaTitle")}
             </h2>
             <p className="text-xl md:text-2xl lg:text-3xl text-slate-300 font-light leading-relaxed drop-shadow-md font-sans px-4 max-w-4xl mx-auto [text-wrap:balance]">
-              &quot;ที่ <strong className="font-medium text-white tracking-wide">Blue Bird Pictures Studio</strong> เราไม่หยุดที่จะค้นคว้าและพัฒนาเทคโนโลยีใหม่ ๆ เพื่อมอบประสบการณ์และเครื่องมือที่ยอดเยี่ยมที่สุดให้กับ<em className="italic text-slate-200 font-normal">นักสร้างสรรค์ทั่วโลก</em> เพราะเราเชื่อว่า <span className="text-blue-400 font-medium italic">ไอเดียที่ยิ่งใหญ่คู่ควรกับเครื่องมือที่ดีที่สุด</span>&quot;
+              {t.rich("ctaDesc", {
+                strong_highlight: (chunks) => <strong className="font-medium text-white tracking-wide">{chunks}</strong>,
+                italic_highlight: (chunks) => <em className="italic text-slate-200 font-normal">{chunks}</em>,
+                color_highlight: (chunks) => <span className="text-blue-400 font-medium italic">{chunks}</span>
+              })}
             </p>
           </div>
         </motion.div>

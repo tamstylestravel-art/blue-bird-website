@@ -4,7 +4,8 @@
     "download": "Download",
     "contact": "Contact",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "team": "Team"
   },
   "Hero": {
     "badge": "Blue Bird Composer is now live",
@@ -158,8 +159,20 @@
     "marquee3": "Film Production",
     "marquee4": "Advanced Coding",
     "marquee5": "Seamless UI",
-    "ctaTitle": "Drive the future with us",
-    "ctaDesc": "Let Blue Bird Composer Pro be a part of your project's success.",
-    "ctaBtn": "Download Plugin (Coming Soon)"
+    "ctaTitle": "Vision",
+    "ctaDesc": "\"At <strong_highlight>Blue Bird Pictures Studio</strong_highlight> we never stop researching and developing new technologies to provide the best experiences and tools for <italic_highlight>creators worldwide</italic_highlight>. Because we believe that <color_highlight>great ideas deserve the best tools</color_highlight>.\"",
+    "ctaBtn": "Download Plugin (Coming Soon)",
+    "member1Name1": "Kritsakorn Rattanapathumphong",
+    "member1Name2": "(กฤศกร รัตนปทุมพงส์)",
+    "member1Role": "Founder, Film Producer & Lead Architect (Blue Bird Composer Pro)",
+    "member1Bio": "A leading executive and founder with core roles as a 'Film Producer' and 'Sound Engineer'. He seamlessly blends limitless technical skills (engineering, computer science, audio systems, VFX) with perfect creativity. Currently the key spearhead as the 'Lead Architect of Blue Bird Composer Pro' under Blue Bird Pictures Studio, he is the mastermind behind the state-of-the-art system architecture. With extensive experience collaborating on national projects and top brands such as GDH, BOXX MUSIC, YUPP, Osotspa, and Singha Corporation, he also serves as a committee member and producer for the Online Mass Media Association, reinforcing his relentless leadership in driving both the film and technology industries forward.",
+    "member2Name1": "Wyatt Mitchell",
+    "member2Name2": "(ไวแอตต์ มิตเชลล์)",
+    "member2Role": "Co-Founder & Core Developer",
+    "member2Bio": "A highly skilled software developer and co-founder of Blue Bird Pictures Studio. He is the driving force behind programming and developing the core systems of the Blue Bird Composer Pro plugin, working directly from his base in California, USA. With deep expertise in coding and software architecture, Wyatt is the mastermind who transforms cutting-edge ideas into powerful, practical software. He is passionate about creating new technologies and is dedicated to elevating the standards of audio and film production to the next level.",
+    "member3Name1": "Ren Tanaka",
+    "member3Name2": "(เร็น ทานากะ 蓮 田中)",
+    "member3Role": "Co-Developer",
+    "member3Bio": "An exceptional software developer straight from Tokyo, Japan. Another key 'Co-Developer' behind the success of the Blue Bird Composer Pro plugin. With his expertise and Japanese-style meticulousness in programming, Ren flawlessly blends technological vision with complex problem-solving. He is a driving force pushing every line of code to achieve maximum performance and stability, making the program truly capable of meeting the demands of professional use."
   }
 }
