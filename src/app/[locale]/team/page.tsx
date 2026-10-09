@@ -73,21 +73,36 @@ export default function TeamPage() {
       {/* Top Hero Banner with Integrated Header Content */}
       <div className="relative w-full min-h-[80vh] md:min-h-[90vh] flex flex-col justify-end pt-32 pb-8 md:pb-12 z-10">
         
-        {/* Background Layer with Mask to smoothly fade into the page background */}
+        {/* Background Layer with Mask (Mobile) */}
         <div 
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none md:hidden"
           style={{
             WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)',
             maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)'
           }}
         >
           <div 
-            className="absolute inset-0 bg-[length:180%_auto] sm:bg-[length:140%_auto] md:bg-cover bg-[center_top_5%] md:bg-center bg-no-repeat opacity-100"
+            className="absolute inset-0 bg-[length:180%_auto] sm:bg-[length:140%_auto] bg-[center_top_5%] bg-no-repeat opacity-100"
             style={{ backgroundImage: `url('/images/team-hero-bg.webp')` }}
           />
-          {/* Very subtle gradients just to ensure white text has a little contrast, slightly stronger on mobile */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 md:from-slate-950/20 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 md:from-slate-950/50 via-slate-950/30 md:via-slate-950/10 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/30 to-transparent" />
+        </div>
+
+        {/* Background Layer with Mask (Desktop) */}
+        <div 
+          className="absolute inset-0 pointer-events-none hidden md:block"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)',
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)'
+          }}
+        >
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
+            style={{ backgroundImage: `url('/images/team-hero-bg.webp')` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-slate-950/10 to-transparent" />
         </div>
         
         <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
