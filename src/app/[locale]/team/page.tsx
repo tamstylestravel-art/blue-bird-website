@@ -172,7 +172,7 @@ export default function TeamPage() {
                   >
                     <img 
                       src={member.image} 
-                      alt={member.nameEN} 
+                      alt={member.name1} 
                       className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity duration-500"
                     />
                   </motion.div>
