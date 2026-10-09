@@ -70,7 +70,7 @@ export default function BasicToolsFeature() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-20 lg:py-32 bg-[var(--background)] overflow-hidden border-t border-[var(--border)]">
+    <section ref={sectionRef} className="relative py-20 lg:py-32 bg-[var(--background)] overflow-hidden">
       {/* Background Decor */}
       <div className={`absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--color-skybrand-400)]/5 blur-[120px] rounded-full transition-opacity duration-1000 pointer-events-none ${isVisible ? 'opacity-100' : 'opacity-0'}`}></div>
 

@@ -1,8 +1,10 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
+import Image from 'next/image';
 import AutoEditFeature from "@/components/AutoEditFeature";
 import AssetFilterFeature from "@/components/AssetFilterFeature";
 import BasicToolsFeature from "@/components/BasicToolsFeature";
+import NetworkCloudBackground from "@/components/NetworkCloudBackground";
 
 const WindowsIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="currentColor" height="1em" width="1em" viewBox="0 0 305 305" xmlns="http://www.w3.org/2000/svg">
@@ -38,44 +40,42 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
       {/* Navigation */}
 
       {/* Hero Section */}
-      <main className="relative flex-grow min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden pt-20 sm:pt-24 pb-12">
-        {/* Clean Minimalist Luxury Light Background */}
-        <div className="absolute inset-0 pointer-events-none -z-10 bg-white overflow-hidden">
-          {/* Subtle modern soft ambient aura behind the logo */}
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[1200px] h-[700px] bg-gradient-to-b from-sky-100/60 via-blue-50/30 to-transparent rounded-full blur-3xl opacity-80 pointer-events-none" />
-          <div className="absolute top-1/4 -left-40 w-[550px] h-[550px] bg-sky-100/35 rounded-full blur-[130px] pointer-events-none" />
-          <div className="absolute top-1/3 -right-40 w-[550px] h-[550px] bg-blue-100/25 rounded-full blur-[130px] pointer-events-none" />
-          
-          {/* High-precision micro-dot grid pattern */}
-          <div 
-            className="absolute inset-0 opacity-[0.45] pointer-events-none"
-            style={{
-              backgroundImage: 'radial-gradient(circle, #cbd5e1 1px, transparent 1px)',
-              backgroundSize: '28px 28px'
-            }}
+      <main className="relative flex-grow min-h-screen flex flex-col items-center justify-start overflow-hidden pt-28 sm:pt-36 pb-12">
+        {/* Image Background */}
+        <div className="absolute inset-0 bg-black z-0">
+          <Image 
+            src="/images/hero_bg_optimized.jpg"
+            alt="Video Editor Studio Background"
+            fill
+            className="object-cover object-center opacity-30 sm:opacity-40"
+            priority
           />
-          
-          {/* Soft bottom vignette fading cleanly into the next section */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+          {/* Subtle overlay to blend - Darker on mobile for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 sm:from-black/40 sm:via-black/10 to-transparent" />
         </div>
+        
+        {/* Transition into the next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-[var(--background)] pointer-events-none z-10" />
+
         
         {/* Layer 2: Content (Image + Text) */}
         <div className="relative z-30 w-full max-w-7xl px-4 flex flex-col items-center justify-center mt-0 sm:mt-4">
-           <div className="opacity-0 animate-bounce-in-custom w-full flex justify-center mb-4 sm:mb-6" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
+
+           <div className="opacity-0 animate-bounce-in-custom w-full flex justify-center mb-0 sm:mb-2" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
              <div className="animate-[float-soft_6s_ease-in-out_infinite] sm:animate-[float_6s_ease-in-out_infinite]" style={{ animationDelay: '1.2s' }}>
                <div 
                  className="relative inline-block"
                  style={{ 
-                   WebkitMaskImage: 'url(/images/BLUE-BIRD-COMPOSER-01.png)', 
+                   WebkitMaskImage: 'url(/images/BLUE-BIRD-COMPOSER-03.png)', 
                    WebkitMaskSize: 'contain', 
                    WebkitMaskRepeat: 'no-repeat', 
                    WebkitMaskPosition: 'center' 
                  }}
                >
                  <img 
-                   src="/images/BLUE-BIRD-COMPOSER-01.png" 
+                   src="/images/BLUE-BIRD-COMPOSER-03.png" 
                    alt="Blue Bird Composer" 
-                   className="w-[95vw] md:w-[85vw] lg:w-[75vw] max-w-6xl h-auto object-contain drop-shadow-2xl" 
+                   className="w-[90vw] sm:w-[75vw] max-w-[400px] md:max-w-2xl lg:max-w-4xl h-auto object-contain drop-shadow-2xl" 
                  />
                  {/* Shine Sweep Effect */}
                  <div 
@@ -87,57 +87,63 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
            </div>
            
            {/* Text Content overlaying the sky */}
-           <div className="text-center space-y-5 opacity-0 animate-fade-in-up z-20" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
-              <h1 className="flex flex-col items-center justify-center font-extrabold tracking-tight leading-tight space-y-3 sm:space-y-4">
+           <div className="text-center space-y-1 sm:space-y-4 opacity-0 animate-fade-in-up z-20" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
+              <h1 className="flex flex-col items-center justify-center tracking-tight leading-tight space-y-1 sm:space-y-3">
                 <div className="flex flex-row items-end justify-center flex-wrap gap-2 sm:gap-4 px-2">
                   {locale === 'th' ? (
                     <>
-                      <span className="block text-5xl sm:text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-[var(--color-skybrand-900)] to-[var(--color-skybrand-600)] drop-shadow-sm pb-1 sm:pb-2 leading-none">ติดปีก</span>
-                      <span className="block text-2xl sm:text-4xl md:text-5xl text-[var(--color-skybrand-800)] opacity-90 pb-2 sm:pb-4 leading-none">ให้งานตัดต่อของคุณ</span>
+                      <span className="block text-4xl sm:text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-100 to-cyan-500 drop-shadow-[0_0_25px_rgba(34,211,238,0.4)] pb-0 leading-none">ติดปีก</span>
+                      <span className="block text-xl sm:text-3xl md:text-4xl font-medium text-slate-200 opacity-90 pb-0 sm:pb-2 leading-none">ให้งานตัดต่อของคุณ</span>
                     </>
                   ) : (
                     <>
-                      <span className="block text-2xl sm:text-4xl md:text-5xl text-[var(--color-skybrand-800)] opacity-90 pb-2 sm:pb-4 leading-none">Give Your Video Editing</span>
-                      <span className="block text-5xl sm:text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-[var(--color-skybrand-900)] to-[var(--color-skybrand-600)] drop-shadow-sm pb-1 sm:pb-2 leading-none">Wings</span>
+                      <span className="block text-xl sm:text-3xl md:text-4xl font-medium text-slate-200 opacity-90 pb-0 sm:pb-2 leading-none">Give Your Video Editing</span>
+                      <span className="block text-4xl sm:text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-100 to-cyan-500 drop-shadow-[0_0_25px_rgba(34,211,238,0.4)] pb-0 leading-none">Wings</span>
                     </>
                   )}
                 </div>
                 
-                <div className="mt-2 sm:mt-6 relative inline-block group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-skybrand-400)] to-[var(--color-skybrand-600)] rounded-2xl sm:rounded-3xl transform rotate-1 sm:rotate-2 scale-105 opacity-20 group-hover:rotate-3 group-hover:scale-110 transition-all duration-300"></div>
-                  <div className="relative px-6 py-2 sm:py-4 bg-white/40 backdrop-blur-sm border border-white/50 rounded-2xl sm:rounded-3xl shadow-sm">
-                    <span className="text-3xl sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-skybrand-600)] to-[var(--color-skybrand-900)] font-black italic tracking-widest uppercase pr-2">
-                      {tHero("title2")}
-                    </span>
-                  </div>
+                <div className="mt-0 sm:mt-2 relative inline-block">
+                  <span className="text-3xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-400 tracking-wider sm:tracking-[0.1em] drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                    {tHero("title2")}
+                  </span>
                 </div>
               </h1>
               
-              <p className="text-base sm:text-xl md:text-2xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
+              <p className="text-[13px] min-[390px]:text-[14px] sm:text-xl md:text-2xl text-slate-300 font-normal max-w-4xl mx-auto leading-relaxed px-2 sm:px-0">
                 {tHero.rich("subtitle", {
-                  highlight: (chunks) => <span className="font-bold text-[var(--color-skybrand-700)] bg-[var(--color-skybrand-100)] px-2 py-0.5 rounded-md mx-1">{chunks}</span>
+                  highlight: (chunks) => <span className="inline-block whitespace-nowrap font-medium text-cyan-200 bg-cyan-950/60 border border-cyan-500/40 shadow-[0_0_15px_rgba(34,211,238,0.2)] px-2 sm:px-3 py-0.5 sm:py-1 rounded-full mx-1">{chunks}</span>,
+                  block: (chunks) => <span className="block mt-1">{chunks}</span>,
+                  nowrap: (chunks) => <span className="whitespace-nowrap">{chunks}</span>
                 })}
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-3 sm:pt-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
-                <a href="/downloads/BlueBirdComposer_Installer.exe" download className="w-full sm:w-auto">
-                  <button className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-[320px] h-[50px] sm:h-[60px] px-4 sm:px-6 rounded-2xl bg-[var(--color-skybrand-900)] text-white text-sm sm:text-base font-bold shadow-xl hover:bg-black hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border border-[var(--color-skybrand-700)]">
-                    <WindowsIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-                    <div className="flex flex-col text-left leading-tight">
-                      <span className="text-[10px] sm:text-xs opacity-80 uppercase tracking-wider text-[var(--color-skybrand-300)]">{tHero("downloadFor")?.split(' ')[0] || 'ดาวน์โหลดเวอร์ชัน'}</span>
-                      <span>{tHero("dlWin")}</span>
+              <div className="w-full flex flex-col md:flex-row items-center justify-center gap-3 sm:gap-6 pt-2 sm:pt-4 px-4 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
+                <a href="/downloads/BlueBirdComposer_Installer.exe" download className="w-full md:w-auto">
+                  <button className="relative overflow-hidden group flex items-center justify-center gap-3 w-full md:w-[320px] h-[56px] sm:h-[64px] px-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] transform hover:-translate-y-1 transition-all duration-300 border-t border-cyan-300/30">
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+                    <WindowsIcon className="relative z-10 w-6 h-6 sm:w-7 sm:h-7" />
+                    <div className="relative z-10 flex flex-col text-left leading-tight">
+                      <span className="text-[10px] sm:text-xs opacity-90 uppercase tracking-wider text-cyan-100">{tHero("downloadFor")?.split(' ')[0] || 'ดาวน์โหลดเวอร์ชัน'}</span>
+                      <span className="text-sm sm:text-base">{tHero("dlWin")}</span>
                     </div>
                   </button>
                 </a>
-                <a href="/downloads/BlueBirdComposer.zxp" download className="w-full sm:w-auto">
-                  <button className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-[320px] h-[50px] sm:h-[60px] px-4 sm:px-6 rounded-2xl bg-[var(--color-skybrand-800)] text-white text-sm sm:text-base font-bold shadow-xl hover:bg-[var(--color-skybrand-900)] hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border border-[var(--color-skybrand-600)]">
-                    <AppleIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-                    <div className="flex flex-col text-left leading-tight">
-                      <span className="text-[10px] sm:text-xs opacity-80 uppercase tracking-wider text-[var(--color-skybrand-200)]">{tHero("downloadFor")?.split(' ')[0] || 'ดาวน์โหลดเวอร์ชัน'}</span>
-                      <span>{tHero("dlMac")}</span>
+                
+                <a href="/downloads/BlueBirdComposer.zxp" download className="w-full md:w-auto">
+                  <button className="relative overflow-hidden group flex items-center justify-center gap-3 w-full md:w-[320px] h-[56px] sm:h-[64px] px-4 rounded-2xl bg-slate-800/80 backdrop-blur-md text-slate-200 font-bold shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:bg-slate-700/80 hover:shadow-[0_0_25px_rgba(255,255,255,0.1)] transform hover:-translate-y-1 transition-all duration-300 border border-slate-600/50 hover:border-slate-400/50">
+                    <AppleIcon className="relative z-10 w-6 h-6 sm:w-7 sm:h-7" />
+                    <div className="relative z-10 flex flex-col text-left leading-tight">
+                      <span className="text-[10px] sm:text-xs opacity-80 uppercase tracking-wider text-slate-400">{tHero("downloadFor")?.split(' ')[0] || 'ดาวน์โหลดเวอร์ชัน'}</span>
+                      <span className="text-sm sm:text-base">{tHero("dlMac")}</span>
                     </div>
                   </button>
                 </a>
+              </div>
+              
+              {/* Version Info */}
+              <div className="mt-8 text-center opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'both' }}>
+                <p className="text-sm sm:text-base text-slate-400 font-light tracking-wide">{tHero("versionInfo")}</p>
               </div>
             </div>
         </div>
