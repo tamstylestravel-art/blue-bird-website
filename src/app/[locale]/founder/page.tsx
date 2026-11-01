@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import FounderProfileClient from "./FounderProfileClient";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://bluebirdpicturesstudio.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.bluebirdpicturesstudio.com";
 
 const FOUNDER_MAIN_IMAGE =
   "/images/กฤศกร รัตนปทุมพงส์ KRITSAKORN RATTANAPATHUMPHONG-optimized.webp";
