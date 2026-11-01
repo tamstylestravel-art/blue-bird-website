@@ -1,12 +1,35 @@
+"use client";
+
 import React from 'react';
-import { Link } from '@/i18n/routing';
-import { getTranslations } from 'next-intl/server';
+import { Link, usePathname } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 import AuthNav from "@/components/layout/AuthNav";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import MobileMenu from "@/components/layout/MobileMenu";
 
-export default async function Navbar() {
-  const tNav = await getTranslations("Navigation");
+export default function Navbar() {
+  const pathname = usePathname();
+  const tNav = useTranslations("Navigation");
+
+  // Normalized path check (strips locale prefix if present, e.g. /th/login -> /login)
+  const cleanPath = (pathname || '/').replace(/^\/(?:th|en|ja)(?=\/|$)/, '') || '/';
+
+  // Suppress Navbar on authentication pages and dashboard
+  const isAuthOrDashboard =
+    cleanPath === '/login' ||
+    cleanPath.startsWith('/login/') ||
+    cleanPath === '/register' ||
+    cleanPath.startsWith('/register/') ||
+    cleanPath === '/reset-password' ||
+    cleanPath.startsWith('/reset-password/') ||
+    cleanPath === '/plugin-auth' ||
+    cleanPath.startsWith('/plugin-auth/') ||
+    cleanPath === '/dashboard' ||
+    cleanPath.startsWith('/dashboard/');
+
+  if (isAuthOrDashboard) {
+    return null;
+  }
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/75 backdrop-blur-2xl border-b border-gray-200 opacity-0 animate-fade-in">

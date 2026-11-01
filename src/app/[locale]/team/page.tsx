@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Music, Film, Code, Monitor, Target, Lightbulb, Zap } from 'lucide-react';
-
+import { Cpu, Music, Film, Code, Monitor, Target, Lightbulb, Zap, ArrowRight } from 'lucide-react';
+import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 export default function TeamPage() {
@@ -14,7 +14,9 @@ export default function TeamPage() {
       name2: t("member1Name2"),
       role: t("member1Role"),
       image: "/images/กฤศกร รัตนปทุมพงส์ KRITSAKORN RATTANAPATHUMPHONG-optimized.webp",
+      alt: "กฤศกร รัตนปทุมพงส์ (Kritsakorn Rattanapathumphong) โปรดิวเซอร์ภาพยนตร์และผู้ก่อตั้ง Blue Bird Pictures Studio",
       bio: t("member1Bio"),
+      profileUrl: "/founder",
       socials: {
         github: "#",
         twitter: "#",
@@ -187,7 +189,7 @@ export default function TeamPage() {
                   >
                     <img 
                       src={member.image} 
-                      alt={member.name1} 
+                      alt={member.alt || member.name1} 
                       className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity duration-500"
                     />
                   </motion.div>
@@ -218,6 +220,18 @@ export default function TeamPage() {
                   <p className="text-slate-300 leading-loose text-sm sm:text-base md:text-lg lg:text-xl font-light drop-shadow-sm max-w-lg md:max-w-none mx-auto md:mx-0">
                     {member.bio}
                   </p>
+
+                  {member.profileUrl && (
+                    <div className="mt-8">
+                      <Link
+                        href={member.profileUrl}
+                        className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600/20 to-cyan-500/20 hover:from-blue-600/35 hover:to-cyan-500/35 border border-blue-500/40 hover:border-blue-400 text-blue-300 hover:text-white text-sm sm:text-base font-medium transition-all duration-300 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] hover:-translate-y-0.5"
+                      >
+                        <span>{t("viewFounderProfile")}</span>
+                        <ArrowRight size={18} />
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -47,7 +47,7 @@ export default async function TermsPage(props: { params: Promise<{ locale: strin
                 <strong>ข้อตกลงและเงื่อนไขการใช้งานโปรแกรม (End User License Agreement)</strong>
               </p>
               <p className="mt-4">
-                โปรแกรม <strong>Blue Bird Composer</strong> ("โปรแกรม") ถูกพัฒนาขึ้นโดย กฤศกร รัตนปทุมพงศ์ (Blue Bird Pictures Studio)
+                โปรแกรม <strong>Blue Bird Composer</strong> ("โปรแกรม") ถูกพัฒนาขึ้นโดย กฤศกร รัตนปทุมพงส์ (Blue Bird Pictures Studio)
               </p>
               <p className="mt-4 text-[var(--color-brand-blue)] font-semibold">
                 โปรดอ่านข้อตกลงด้านล่างนี้ก่อนทำการติดตั้ง

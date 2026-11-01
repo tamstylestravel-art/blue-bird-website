@@ -1,5 +1,14 @@
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
+import enMessages from '../../messages/en.json';
+import thMessages from '../../messages/th.json';
+import jaMessages from '../../messages/ja.json';
+
+const messagesMap: Record<string, typeof thMessages> = {
+  en: enMessages,
+  th: thMessages,
+  ja: jaMessages as unknown as typeof thMessages,
+};
 
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale;
@@ -10,8 +19,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
  
   return {
     locale,
-    messages: (await import(`../../messages/${locale}.json`)).default
+    messages: messagesMap[locale] || enMessages
   };
 });
-
-// Touch for hot reload

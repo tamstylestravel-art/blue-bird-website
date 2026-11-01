@@ -49,16 +49,16 @@ export default async function RootLayout(props: {
   return (
     <html lang={locale} suppressHydrationWarning className={`dark ${kanit.variable} ${k2d.variable} ${kanit.className} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <AuthProvider>
-          <SessionProvider>
-            <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages}>
+          <AuthProvider>
+            <SessionProvider>
               <Navbar />
               {children}
               <Footer />
               <CookieConsent />
-            </NextIntlClientProvider>
-          </SessionProvider>
-        </AuthProvider>
+            </SessionProvider>
+          </AuthProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
