@@ -140,6 +140,8 @@
     "default": "An error occurred. Please try again."
   },
   "Team": {
+    "metaTitle": "チーム紹介 | Blue Bird Pictures Studio 開発者・クリエイター",
+    "metaDescription": "Blue Bird Pictures Studioのチーム紹介。創設者クリサコーン・ラッタナパトゥムポンと国際的なエンジニアチーム。",
     "headerBadge": "ビジョナリーたちのご紹介",
     "headerTitle1": "私たちの",
     "headerTitle2": "チーム",

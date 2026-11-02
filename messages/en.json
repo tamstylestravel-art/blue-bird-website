@@ -146,6 +146,8 @@
     "default": "An error occurred. Please try again."
   },
   "Team": {
+    "metaTitle": "Our Team | Blue Bird Pictures Studio Creators & Developers",
+    "metaDescription": "Meet the visionaries behind Blue Bird Pictures Studio, led by Kritsakorn Rattanapathumphong and an international team of engineers.",
     "headerBadge": "Meet the Visionaries",
     "headerTitle1": "Get to know",
     "headerTitle2": "Our Team",
