@@ -42,8 +42,22 @@ export async function generateMetadata(props: {
       "ใหม่ กฤศกร",
       "ใหม่ กฤศกร รัตนปทุมพงส์",
       "Kritsakorn Rattanapathumphong",
+      "บริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด",
+      "บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส",
+      "BLUE ENVIEN INTEGRATED VENTURES CO., LTD.",
+      "Blue Envien Integrated Ventures",
+      "CEO บลูเอนเวียน",
+      "ประธานบริษัท บลูเอนเวียน",
       "Blue Bird Pictures Studio",
       "Blue Bird Composer Pro",
+      "Blue Avian Pro",
+      "Blue Avian Pro AI Core Engine",
+      "Iron Wing Pro",
+      "แอปฟิตเนสและโภชนาการ",
+      "Pro Pet Thailand",
+      "Animal World",
+      "บัตรประชาชนสัตว์เลี้ยง",
+      "GPS ติดตามสัตว์เลี้ยง",
       "ผู้กำกับภาพยนตร์",
       "โปรดิวเซอร์ภาพยนตร์",
       "ซาวด์เอนจิเนียร์",
@@ -101,6 +115,10 @@ export async function generateMetadata(props: {
           alt: imageAlt,
         },
         {
+          url: `${BASE_URL}/images/founder/กฤศกร-รัตนปทุมพงส์-ceo-ประธานบริษัท-บลูเอนเวียน-อินทิเกรเต็ด-เวนเจอร์ส.webp`,
+          alt: "กฤศกร รัตนปทุมพงส์ (Kritsakorn Rattanapathumphong) ประธานเจ้าหน้าที่บริหาร (CEO) บริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด",
+        },
+        {
           url: MAIN_POSTER_TH,
           alt: "4 จตุรเทพ ดาวประจำเมือง - สารคดีเชิงภาพยนตร์ จากผู้กำกับ กฤศกร รัตนปทุมพงส์",
         },
@@ -110,7 +128,10 @@ export async function generateMetadata(props: {
       card: "summary_large_image",
       title,
       description,
-      images: [FOUNDER_MAIN_IMAGE],
+      images: [
+        FOUNDER_MAIN_IMAGE,
+        `${BASE_URL}/images/founder/กฤศกร-รัตนปทุมพงส์-ceo-ประธานบริษัท-บลูเอนเวียน-อินทิเกรเต็ด-เวนเจอร์ส.webp`,
+      ],
     },
   };
 }
@@ -159,6 +180,27 @@ export default async function FounderPage(props: {
           },
           {
             "@type": "ImageObject",
+            url: `${BASE_URL}/images/founder/กฤศกร-รัตนปทุมพงส์-ceo-ประธานบริษัท-บลูเอนเวียน-อินทิเกรเต็ด-เวนเจอร์ส.webp`,
+            name: "กฤศกร รัตนปทุมพงส์ (Kritsakorn Rattanapathumphong) ประธานเจ้าหน้าที่บริหาร (CEO) บริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด และผู้ก่อตั้ง Blue Bird Pictures Studio",
+            caption:
+              "กฤศกร รัตนปทุมพงส์ บรรยายบนเวที Keynote แสดงวิสัยทัศน์เทคโนโลยีและภาพยนตร์ระดับสากล",
+          },
+          {
+            "@type": "ImageObject",
+            url: `${BASE_URL}/images/founder/blue-avian-pro-ai-core-engine-บลู-เอเวียน-โปร.webp`,
+            name: "BLUE AVIAN PRO - ขุมพลัง AI อัจฉริยะ (A.I. Core Engine) Blue Bird Pictures Studio",
+            caption:
+              "BLUE AVIAN PRO A.I. Core Engine สถาปัตยกรรม AI อัจฉริยะคิดค้นและพัฒนาโดย กฤศกร รัตนปทุมพงส์",
+          },
+          {
+            "@type": "ImageObject",
+            url: `${BASE_URL}/images/founder/blue-envien-ventures-ecosystem-iron-wing-pro-pet-thailand.webp`,
+            name: "Blue Envien Integrated Ventures Ecosystem - Blue Bird Composer Pro, Iron Wing Pro, Pro Pet Thailand",
+            caption:
+              "กลุ่มธุรกิจนวัตกรรมในเครือ Blue Envien Integrated Ventures Co., Ltd. ภายใต้การนำของ กฤศกร รัตนปทุมพงส์",
+          },
+          {
+            "@type": "ImageObject",
             url: `${BASE_URL}/images/founder/กฤศกร-รัตนปทุมพงส์-ผู้กำกับภาพยนตร์-เบื้องหลังกองถ่าย-1.jpg`,
             name: "กฤศกร รัตนปทุมพงส์ ผู้กำกับภาพยนตร์ เบื้องหลังกองถ่ายสารคดีเชิงภาพยนตร์ 4 จตุรเทพ ดาวประจำเมือง",
             caption:
@@ -173,19 +215,30 @@ export default async function FounderPage(props: {
           },
         ],
         jobTitle: [
+          "Chief Executive Officer (CEO)",
+          "President",
           "Founder",
           "Film Director",
           "Film Producer",
           "Sound Engineer",
-          "Lead Software Architect (Blue Bird Composer Pro)",
+          "Lead Software Architect (Blue Bird Composer Pro & Blue Avian Pro AI)",
         ],
         description:
-          "ประวัติ กฤศกร รัตนปทุมพงส์ ผู้กำกับภาพยนตร์ โปรดิวเซอร์ภาพยนตร์ ซาวด์เอนจิเนียร์ และผู้พัฒนาปลั๊กอิน Blue Bird Composer Pro ผู้กำกับสารคดีเชิงภาพยนตร์ 4 จตุรเทพ ดาวประจำเมือง ดีกรีปริญญาตรีเกียรตินิยมอันดับ 1 สองสาขา (ภาพยนตร์ ม.สยาม และวิทยาการคอมพิวเตอร์)",
-        worksFor: {
-          "@type": "Organization",
-          name: "Blue Bird Pictures Studio",
-          url: BASE_URL,
-        },
+          "ประวัติ กฤศกร รัตนปทุมพงส์ ประธานเจ้าหน้าที่บริหาร (CEO) และประธานบริษัท บริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด (BLUE ENVIEN INTEGRATED VENTURES CO., LTD.) ผู้กำกับภาพยนตร์ โปรดิวเซอร์ภาพยนตร์ ซาวด์เอนจิเนียร์ และผู้พัฒนาปลั๊กอิน Blue Bird Composer Pro ผู้สร้างขุมพลัง AI Blue Avian Pro พร้อมขับเคลื่อนนวัตกรรมเพื่อสุขภาพ Iron Wing Pro และระบบดูแลสัตว์เลี้ยงอัจฉริยะ Pro Pet Thailand ดีกรีเกียรตินิยมอันดับ 1 สองสาขา ม.สยาม",
+        worksFor: [
+          {
+            "@type": "Organization",
+            name: "BLUE ENVIEN INTEGRATED VENTURES CO., LTD. (บริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด)",
+            url: BASE_URL,
+            description:
+              "กลุ่มบริษัทผู้ลงทุนและพัฒนานวัตกรรมสื่อสร้างสรรค์ ปัญญาประดิษฐ์ เทคโนโลยีสุขภาพ และนวัตกรรมสัตว์เลี้ยง",
+          },
+          {
+            "@type": "Organization",
+            name: "Blue Bird Pictures Studio",
+            url: BASE_URL,
+          },
+        ],
         memberOf: {
           "@type": "Organization",
           name: "สมาคมสื่อมวลชนออนไลน์",

@@ -35,6 +35,9 @@ import { useTranslations } from "next-intl";
 const FOUNDER_MAIN_IMAGE =
   "/images/กฤศกร รัตนปทุมพงส์ KRITSAKORN RATTANAPATHUMPHONG-optimized.webp";
 
+const STUDIO_HERO_BG_IMAGE =
+  "/images/founder/กฤศกร-รัตนปทุมพงส์-สตูดิโอ-blue-bird-pictures-studio-production-suite.webp";
+
 export interface FilmPosterItem {
   src: string;
   title: string;
@@ -124,6 +127,18 @@ export interface BehindTheScenesPhoto {
 
 const BTS_PHOTOS: BehindTheScenesPhoto[] = [
   {
+    src: "/images/founder/กฤศกร-รัตนปทุมพงส์-ceo-ประธานบริษัท-บลูเอนเวียน-อินทิเกรเต็ด-เวนเจอร์ส.webp",
+    title: "กฤศกร รัตนปทุมพงส์ — ผู้บริหารระดับสูง (CEO) & ประธานบริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด",
+    subtitle: "Keynote Speaker & Executive Visionary • Global Tech & Cinema",
+    alt: "กฤศกร รัตนปทุมพงส์ (Kritsakorn Rattanapathumphong) ผู้บริหารระดับสูงและ CEO บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด บรรยายบนเวที Keynote",
+  },
+  {
+    src: "/images/founder/blue-avian-pro-ai-core-engine-บลู-เอเวียน-โปร.webp",
+    title: "BLUE AVIAN PRO — ขุมพลัง AI อัจฉริยะ (A.I. Core Engine)",
+    subtitle: "Proprietary AI Architecture for Professional Creative Media Suite",
+    alt: "BLUE AVIAN PRO ขุมพลัง AI อัจฉริยะ A.I. Core Engine คิดค้นและพัฒนาโดย กฤศกร รัตนปทุมพงส์",
+  },
+  {
     src: "/images/founder/กฤศกร-รัตนปทุมพงส์-ผู้กำกับภาพยนตร์-เบื้องหลังกองถ่าย-2.jpg",
     title: "กฤศกร รัตนปทุมพงส์ — ผู้กำกับสารคดีเชิงภาพยนตร์ 4 จตุรเทพ ดาวประจำเมือง",
     subtitle: "Directing on Location • Uthai Thani Province",
@@ -134,6 +149,12 @@ const BTS_PHOTOS: BehindTheScenesPhoto[] = [
     title: "เบื้องหลังการถ่ายทำร่วมกับทีมนักแสดงนำและทีมงานโปรดักชั่น",
     subtitle: "4 Elemental Guardians Production Crew & Cast",
     alt: "กฤศกร รัตนปทุมพงส์ (Kritsakorn Rattanapathumphong) ผู้กำกับและโปรดิวเซอร์ภาพยนตร์ ร่วมกับนักแสดงนำและทีมงานกองถ่าย 4 จตุรเทพ ดาวประจำเมือง",
+  },
+  {
+    src: "/images/founder/blue-envien-ventures-ecosystem-iron-wing-pro-pet-thailand.webp",
+    title: "Blue Envien Integrated Ventures — อาณาจักรธุรกิจและนวัตกรรมในเครือ",
+    subtitle: "Blue Bird Composer Pro • Iron Wing Pro • Pro Pet Thailand Animal World",
+    alt: "กลุ่มธุรกิจนวัตกรรมในเครือ Blue Envien Integrated Ventures Co., Ltd. กฤศกร รัตนปทุมพงส์",
   },
   {
     src: "/images/founder/กฤศกร-รัตนปทุมพงส์-สตูดิโอ-blue-bird-pictures-studio-production-suite.webp",
@@ -367,6 +388,9 @@ export default function FounderProfileClient() {
   const [selectedGearIndex, setSelectedGearIndex] = useState<number | null>(
     null
   );
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(
+    null
+  );
   const [activeGearHoverIndex, setActiveGearHoverIndex] = useState<number | null>(
     null
   );
@@ -378,6 +402,24 @@ export default function FounderProfileClient() {
       if (isStudioHeroModalOpen) {
         if (e.key === "Escape") {
           setIsStudioHeroModalOpen(false);
+        }
+      } else if (selectedPhotoIndex !== null) {
+        if (e.key === "Escape") {
+          setSelectedPhotoIndex(null);
+        } else if (e.key === "ArrowLeft") {
+          setSelectedPhotoIndex(
+            (prev) =>
+              prev === null
+                ? null
+                : (prev - 1 + BTS_PHOTOS.length) % BTS_PHOTOS.length
+          );
+        } else if (e.key === "ArrowRight") {
+          setSelectedPhotoIndex(
+            (prev) =>
+              prev === null
+                ? null
+                : (prev + 1) % BTS_PHOTOS.length
+          );
         }
       } else if (selectedGearIndex !== null) {
         if (e.key === "Escape") {
@@ -420,7 +462,7 @@ export default function FounderProfileClient() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedGearIndex, selectedPosterIndex, isStudioHeroModalOpen]);
+  }, [selectedGearIndex, selectedPosterIndex, selectedPhotoIndex, isStudioHeroModalOpen]);
 
   // ระบบเลื่อนโปสเตอร์อัตโนมัติด้วย GPU Sub-pixel translate3d (ลื่นไหลระดับ 60-144fps ไม่กระตุก)
   useEffect(() => {
@@ -528,22 +570,28 @@ export default function FounderProfileClient() {
 
   const roleCards = [
     {
-      icon: Film,
+      icon: Building2,
       title: t("role1Title"),
       desc: t("role1Desc"),
+      accent: "amber" as const,
+    },
+    {
+      icon: Film,
+      title: t("role2Title"),
+      desc: t("role2Desc"),
       accent: "blue" as const,
     },
     {
-      icon: Code2,
-      title: t("role2Title"),
-      desc: t("role2Desc"),
+      icon: Cpu,
+      title: t("role3Title"),
+      desc: t("role3Desc"),
       accent: "cyan" as const,
     },
     {
       icon: ShieldCheck,
-      title: t("role3Title"),
-      desc: t("role3Desc"),
-      accent: "blue" as const,
+      title: t("role4Title"),
+      desc: t("role4Desc"),
+      accent: "emerald" as const,
     },
   ];
 
@@ -734,10 +782,12 @@ export default function FounderProfileClient() {
           </section>
 
           {/* 2. FULL-WIDTH KEY ROLES ROW (Staggered Pop-Up Cards) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {roleCards.map((card, idx) => {
               const IconComp = card.icon;
+              const isAmber = card.accent === "amber";
               const isCyan = card.accent === "cyan";
+              const isEmerald = card.accent === "emerald";
               return (
                 <motion.div
                   key={idx}
@@ -750,20 +800,28 @@ export default function FounderProfileClient() {
                   }}
                   transition={{
                     duration: 0.65,
-                    delay: 0.5 + idx * 0.1,
+                    delay: 0.45 + idx * 0.08,
                     ease: SMOOTH_EASE,
                   }}
                   className={`p-6 rounded-2xl bg-slate-900/50 border border-slate-800/80 ${
-                    isCyan
-                      ? "hover:border-cyan-500/40"
-                      : "hover:border-blue-500/40"
-                  } transition-colors flex items-start gap-4 shadow-lg`}
+                    isAmber
+                      ? "hover:border-amber-500/50 hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]"
+                      : isCyan
+                      ? "hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]"
+                      : isEmerald
+                      ? "hover:border-emerald-500/50 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]"
+                      : "hover:border-blue-500/50 hover:shadow-[0_0_25px_rgba(59,130,246,0.15)]"
+                  } transition-all flex items-start gap-4 shadow-lg`}
                 >
                   <div
                     className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 border ${
-                      isCyan
-                        ? "bg-cyan-500/10 border-cyan-500/25 text-cyan-400"
-                        : "bg-blue-500/10 border-blue-500/25 text-blue-400"
+                      isAmber
+                        ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
+                        : isCyan
+                        ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
+                        : isEmerald
+                        ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
+                        : "bg-blue-500/10 border-blue-500/30 text-blue-400"
                     }`}
                   >
                     <IconComp size={24} />
@@ -780,6 +838,287 @@ export default function FounderProfileClient() {
               );
             })}
           </div>
+
+          {/* 3. CEO & CORPORATE LEADERSHIP SPOTLIGHT */}
+          <motion.section
+            id="executive-vision"
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.75, ease: SMOOTH_EASE }}
+            className="relative rounded-3xl bg-gradient-to-br from-slate-900/70 via-slate-900/40 to-slate-950/90 border border-slate-800/80 p-6 sm:p-10 lg:p-12 shadow-2xl overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-blue-500/5 to-transparent pointer-events-none" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Keynote Photo */}
+              <div className="lg:col-span-5">
+                <div
+                  onClick={() => setSelectedPhotoIndex(0)}
+                  className="group relative rounded-2xl overflow-hidden border border-slate-700/80 hover:border-amber-500/60 bg-slate-950 shadow-2xl aspect-[3/4] cursor-pointer transition-colors"
+                >
+                  <img
+                    src="/images/founder/กฤศกร-รัตนปทุมพงส์-ceo-ประธานบริษัท-บลูเอนเวียน-อินทิเกรเต็ด-เวนเจอร์ส.webp"
+                    alt="กฤศกร รัตนปทุมพงส์ ผู้บริหารระดับสูงและ CEO บริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด บรรยายบนเวที Keynote"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/15 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 border border-white/10 rounded-2xl pointer-events-none" />
+
+                  {/* Expand badge */}
+                  <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Expand size={16} />
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-slate-950/85 backdrop-blur-md border border-amber-500/30">
+                    <p className="text-[11px] font-semibold tracking-widest text-amber-400 uppercase">
+                      BLUE ENVIEN INTEGRATED VENTURES
+                    </p>
+                    <p className="text-xs sm:text-sm text-slate-200 font-medium mt-0.5">
+                      กฤศกร รัตนปทุมพงส์ • ผู้บริหารระดับสูง & Keynote Speaker
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Narrative & Vision */}
+              <div className="lg:col-span-7 space-y-6">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase">
+                  <Building2 size={14} />
+                  <span>EXECUTIVE LEADERSHIP & CORPORATE STRATEGY</span>
+                </div>
+
+                <div>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug">
+                    ผู้บริหารระดับสูง & ผู้นำวิสัยทัศน์แห่งอนาคต
+                  </h2>
+                  <div className="mt-2 flex flex-col gap-1">
+                    <span className="text-sm sm:text-base font-semibold text-amber-400 tracking-wide">
+                      BLUE ENVIEN INTEGRATED VENTURES CO., LTD.
+                    </span>
+                    <span className="text-xs sm:text-sm text-slate-400 font-light">
+                      บริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+                  <p>
+                    ในฐานะ <strong className="text-white font-medium">ผู้บริหารระดับสูงและประธานกรรมการบริหาร (Chief Executive Officer - CEO)</strong> บริษัท บลูเอนเวียน อินทิเกรเต็ด เวนเจอร์ส จำกัด กฤศกร รัตนปทุมพงส์ คือผู้นำทัพองค์กรผู้มีบทบาทสำคัญในการกำหนดยุทธศาสตร์การลงทุนและพัฒนาเทคโนโลยี ผสานศักยภาพระหว่างวงการภาพยนตร์ระดับมืออาชีพ เทคโนโลยีปัญญาประดิษฐ์ (AI) วิทยาศาสตร์สุขภาพ และนวัตกรรม IoT เพื่อการใช้ชีวิต
+                  </p>
+                  <p>
+                    ด้วยรากฐานที่แข็งแกร่งจากดีกรีเกียรตินิยมอันดับ 1 สองสาขาวิชา ทั้งด้านภาพยนตร์และวิทยาการคอมพิวเตอร์ กฤศกรได้นำแนวคิด <span className="text-cyan-300 font-medium">&ldquo;Artistic Innovation Powered by Advanced Engineering&rdquo;</span> มาขับเคลื่อนกลุ่มธุรกิจในเครือ ให้เติบโตอย่างมั่นคงและสร้างผลกระทบเชิงบวกในระดับสากล
+                  </p>
+                </div>
+
+                {/* Corporate Pill Tags */}
+                <div className="pt-2 flex flex-wrap gap-2.5">
+                  <div className="px-3 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-300">
+                    🏛️ Corporate Holding & Governance
+                  </div>
+                  <div className="px-3 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-300">
+                    🤖 AI & Creative Software Suite
+                  </div>
+                  <div className="px-3 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-300">
+                    🎬 Cinematic Documentary & Media
+                  </div>
+                  <div className="px-3 py-1.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-300">
+                    🐾 Smart Pet IoT & Animal Care
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* 4. BUSINESS VENTURES & INNOVATION ECOSYSTEM */}
+          <motion.section
+            id="business-ventures"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.75, ease: SMOOTH_EASE }}
+            className="relative rounded-3xl bg-slate-900/40 border border-slate-800/80 p-6 sm:p-10 lg:p-12 shadow-2xl overflow-hidden space-y-8"
+          >
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 text-cyan-400 text-xs font-semibold uppercase tracking-[0.2em] mb-2">
+                <Sparkles size={15} />
+                <span>{t("venturesBadge")}</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                {t("venturesTitle")}
+              </h2>
+              <p className="text-sm sm:text-base text-slate-300 mt-2 font-light leading-relaxed">
+                {t("venturesSubtitle")}
+              </p>
+            </div>
+
+            {/* 3 Luxury Venture Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-7 items-stretch">
+              {/* Venture 1: BLUE BIRD Composer PRO & BLUE AVIAN PRO AI */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: SMOOTH_EASE }}
+                className="group flex flex-col justify-between rounded-2xl bg-slate-950/70 border border-slate-800/90 hover:border-cyan-500/50 p-5 sm:p-6 transition-all shadow-xl"
+              >
+                <div className="space-y-4">
+                  <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                    <img
+                      src="/images/founder/blue-bird-composer-pro-creative-suite.webp"
+                      alt="BLUE BIRD Composer PRO & BLUE AVIAN PRO A.I. Core Engine"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-[10px] font-bold tracking-wider uppercase backdrop-blur-sm">
+                      {t("v1Badge")}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                      {t("v1Title")}
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-0.5 font-medium">
+                      {t("v1Company")}
+                    </p>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+                    {t("v1Desc")}
+                  </p>
+
+                  <div className="pt-2 flex flex-wrap gap-1.5">
+                    {["16 Languages", "Premiere Pro", "DaVinci Resolve", "Final Cut Pro", "Windows & macOS"].map((tag, i) => (
+                      <span key={i} className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[11px] text-slate-300 font-mono">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-5 mt-4 border-t border-slate-800/80 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedPhotoIndex(1)}
+                    className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-medium transition-colors cursor-pointer"
+                  >
+                    <Cpu size={14} />
+                    <span>ดูขุมพลัง AI Blue Avian Pro</span>
+                  </button>
+                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">
+                    AI SUITE
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Venture 2: IRON WING PRO */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: SMOOTH_EASE }}
+                className="group flex flex-col justify-between rounded-2xl bg-slate-950/70 border border-slate-800/90 hover:border-amber-500/50 p-5 sm:p-6 transition-all shadow-xl"
+              >
+                <div className="space-y-4">
+                  <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                    <img
+                      src="/images/founder/iron-wing-pro-fitness-nutrition-app.webp"
+                      alt="IRON WING PRO แอปพลิเคชันฟิตเนสและโภชนาการ"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[10px] font-bold tracking-wider uppercase backdrop-blur-sm">
+                      {t("v2Badge")}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-amber-300 transition-colors">
+                      {t("v2Title")}
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-0.5 font-medium">
+                      {t("v2Company")}
+                    </p>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+                    {t("v2Desc")}
+                  </p>
+
+                  <div className="pt-2 flex flex-wrap gap-1.5">
+                    {["📸 AI ถ่ายรูปนับแคลอรี", "🥗 คุมอาหาร & ไขมัน", "🏋️ สอนออกกำลังกาย", "🏢 IRON WING Fitness"].map((tag, i) => (
+                      <span key={i} className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[11px] text-slate-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-5 mt-4 border-t border-slate-800/80 flex items-center justify-between">
+                  <span className="text-xs text-amber-400 font-medium">
+                    iOS (App Store) • Android
+                  </span>
+                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">
+                    HEALTH TECH
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Venture 3: PRO PET THAILAND (Animal World) */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: SMOOTH_EASE }}
+                className="group flex flex-col justify-between rounded-2xl bg-slate-950/70 border border-slate-800/90 hover:border-emerald-500/50 p-5 sm:p-6 transition-all shadow-xl"
+              >
+                <div className="space-y-4">
+                  <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                    <img
+                      src="/images/founder/pro-pet-thailand-smart-pet-id-gps.webp"
+                      alt="PRO PET THAILAND บัตรประชาชนสัตว์เลี้ยง พร้อมระบบติดตาม Real-time GPS"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-bold tracking-wider uppercase backdrop-blur-sm">
+                      {t("v3Badge")}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+                      {t("v3Title")}
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-0.5 font-medium">
+                      {t("v3Company")}
+                    </p>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+                    {t("v3Desc")}
+                  </p>
+
+                  <div className="pt-2 flex flex-wrap gap-1.5">
+                    {["🪪 บัตรประชาชนสัตว์เลี้ยง", "📍 Real-Time GPS", "📋 ประวัติ & พฤติกรรม", "🏥 โรงพยาบาลสัตว์"].map((tag, i) => (
+                      <span key={i} className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[11px] text-slate-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-5 mt-4 border-t border-slate-800/80 flex items-center justify-between">
+                  <span className="text-xs text-emerald-400 font-medium">
+                    iOS (App Store) • Android
+                  </span>
+                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">
+                    SMART PET IOT
+                  </span>
+                </div>
+              </motion.div>
+            </div>
+          </motion.section>
 
           {/* 3. H2: EDUCATION & MUSICAL BACKGROUND SECTION */}
           <motion.section
@@ -1158,20 +1497,22 @@ export default function FounderProfileClient() {
               </div>
             </div>
 
-            {/* Top 2 On-Location Directing Photos */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {BTS_PHOTOS.slice(0, 2).map((photo, idx) => (
+            {/* Executive & Production Gallery Grid (6 High-Resolution Photos) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {BTS_PHOTOS.map((photo, idx) => (
                 <motion.figure
                   key={photo.src}
+                  onClick={() => setSelectedPhotoIndex(idx)}
                   initial={{ opacity: 0, y: 30, scale: 0.95 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
+                  whileHover={{ y: -4 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{
-                    duration: 0.7,
-                    delay: idx * 0.12,
+                    duration: 0.6,
+                    delay: idx * 0.08,
                     ease: SMOOTH_EASE,
                   }}
-                  className="group relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl aspect-[16/10]"
+                  className="group relative rounded-3xl overflow-hidden border border-slate-800 hover:border-blue-500/50 bg-slate-900 shadow-2xl aspect-[16/11] cursor-pointer transition-colors"
                 >
                   <img
                     itemProp="image"
@@ -1179,14 +1520,20 @@ export default function FounderProfileClient() {
                     alt={photo.alt}
                     title={photo.alt}
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/25 to-transparent pointer-events-none" />
+
+                  {/* Expand icon pill on hover */}
+                  <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Expand size={16} />
+                  </div>
+
                   <figcaption className="absolute bottom-4 left-5 right-5">
-                    <p className="text-sm sm:text-base font-semibold text-white drop-shadow">
+                    <p className="text-sm sm:text-base font-semibold text-white drop-shadow line-clamp-1">
                       {photo.title}
                     </p>
-                    <span className="text-xs text-amber-300 uppercase tracking-widest block mt-0.5">
+                    <span className="text-xs text-amber-300 uppercase tracking-widest block mt-0.5 truncate">
                       {photo.subtitle}
                     </span>
                   </figcaption>
@@ -1203,9 +1550,9 @@ export default function FounderProfileClient() {
             {/* Grand Studio Background Image (Shifted up high so face and screens are 100% clear above text) */}
             <div className="absolute -top-40 sm:-top-60 lg:-top-80 inset-x-0 -bottom-24 sm:-bottom-32 -z-10 pointer-events-none overflow-hidden">
               <img
-                src={BTS_PHOTOS[2].src}
-                alt={BTS_PHOTOS[2].alt}
-                title={BTS_PHOTOS[2].alt}
+                src={STUDIO_HERO_BG_IMAGE}
+                alt="Blue Bird Pictures Studio Production Suite กฤศกร รัตนปทุมพงส์"
+                title="Blue Bird Pictures Studio Production Suite กฤศกร รัตนปทุมพงส์"
                 className="w-full h-full object-cover object-[center_75%] sm:object-[center_70%] opacity-90 filter brightness-95 contrast-105 transform -translate-y-28 sm:-translate-y-40 lg:-translate-y-52"
               />
               {/* Soft Ambient Radial Overlay */}
@@ -1523,6 +1870,97 @@ export default function FounderProfileClient() {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* Lightbox Modal for Executive & Production Gallery */}
+      <AnimatePresence>
+        {selectedPhotoIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6"
+            onClick={() => setSelectedPhotoIndex(null)}
+          >
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setSelectedPhotoIndex(null)}
+              aria-label="ปิดหน้าต่างแสดงภาพ"
+              className="fixed top-5 right-5 z-50 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-white/15 text-white flex items-center justify-center transition-colors cursor-pointer"
+            >
+              <X size={22} />
+            </button>
+
+            {/* Prev Button */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedPhotoIndex(
+                  (selectedPhotoIndex - 1 + BTS_PHOTOS.length) % BTS_PHOTOS.length
+                );
+              }}
+              aria-label="รูปภาพก่อนหน้า"
+              className="fixed left-3 sm:left-6 z-50 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-white/15 hover:border-blue-500 text-white flex items-center justify-center transition-all cursor-pointer"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Next Button */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedPhotoIndex(
+                  (selectedPhotoIndex + 1) % BTS_PHOTOS.length
+                );
+              }}
+              aria-label="รูปภาพถัดไป"
+              className="fixed right-3 sm:right-6 z-50 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-white/15 hover:border-blue-500 text-white flex items-center justify-center transition-all cursor-pointer"
+            >
+              <ChevronRight size={24} />
+            </button>
+
+            {/* Content Container */}
+            <motion.div
+              key={selectedPhotoIndex}
+              initial={{ opacity: 0, scale: 0.92, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 15 }}
+              transition={{ duration: 0.3, ease: SMOOTH_EASE }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center bg-slate-900/90 border border-slate-800 rounded-3xl p-4 sm:p-6 overflow-hidden shadow-2xl backdrop-blur-md"
+            >
+              <div className="relative w-full max-h-[68vh] flex items-center justify-center overflow-hidden rounded-2xl bg-slate-950">
+                <img
+                  src={BTS_PHOTOS[selectedPhotoIndex].src}
+                  alt={BTS_PHOTOS[selectedPhotoIndex].alt}
+                  className="max-h-[68vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl"
+                />
+              </div>
+
+              {/* Caption */}
+              <div className="w-full mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
+                <div>
+                  <div className="inline-block text-[10px] font-bold tracking-widest text-blue-400 uppercase px-2.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 mb-1.5">
+                    EXECUTIVE & PRODUCTION GALLERY
+                  </div>
+                  <h3 className="text-base sm:text-xl font-bold text-white">
+                    {BTS_PHOTOS[selectedPhotoIndex].title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 font-light mt-0.5">
+                    {BTS_PHOTOS[selectedPhotoIndex].subtitle}
+                  </p>
+                </div>
+                <div className="text-xs text-slate-400 font-mono flex-shrink-0 self-end sm:self-center">
+                  {selectedPhotoIndex + 1} / {BTS_PHOTOS.length}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Fullscreen Studio Hero Modal */}
       <AnimatePresence>
         {isStudioHeroModalOpen && (
@@ -1553,8 +1991,8 @@ export default function FounderProfileClient() {
             >
               <div className="relative w-full max-h-[70vh] flex items-center justify-center overflow-hidden rounded-2xl bg-slate-950">
                 <img
-                  src={BTS_PHOTOS[2].src}
-                  alt={BTS_PHOTOS[2].alt}
+                  src={STUDIO_HERO_BG_IMAGE}
+                  alt="Blue Bird Pictures Studio Suite"
                   className="max-h-[70vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl"
                 />
               </div>
@@ -1565,10 +2003,10 @@ export default function FounderProfileClient() {
                     BLUE BIRD PICTURES STUDIO SUITE
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-white">
-                    {BTS_PHOTOS[2].title}
+                    Blue Bird Pictures Studio — Production, Sound Engineering & Software Suite
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-300 font-light mt-1">
-                    {BTS_PHOTOS[2].subtitle}
+                    Executive Producer, Sound Engineer & Lead Software Architect
                   </p>
                 </div>
               </div>
