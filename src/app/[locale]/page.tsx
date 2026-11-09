@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import Image from 'next/image';
@@ -5,6 +6,9 @@ import AutoEditFeature from "@/components/AutoEditFeature";
 import AssetFilterFeature from "@/components/AssetFilterFeature";
 import BasicToolsFeature from "@/components/BasicToolsFeature";
 import NetworkCloudBackground from "@/components/NetworkCloudBackground";
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.bluebirdpicturesstudio.com";
 
 const WindowsIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="currentColor" height="1em" width="1em" viewBox="0 0 305 305" xmlns="http://www.w3.org/2000/svg">
@@ -23,6 +27,47 @@ const AppleIcon = ({ className }: { className?: string }) => (
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await props.params;
+  const tHero = await getTranslations({ locale, namespace: "Hero" });
+
+  const title = `${tHero("title1")} | Blue Bird Pictures Studio`;
+  const rawDescription = tHero("subtitle") || "The ultimate Premiere Pro extension for seamless workflow.";
+  const description = rawDescription.replace(/<[^>]*>/g, "").trim();
+
+  return {
+    metadataBase: new URL(BASE_URL),
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        th: "/th",
+        en: "/en",
+        ja: "/ja",
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/${locale}`,
+      siteName: "Blue Bird Pictures Studio",
+      images: [
+        {
+          url: "/images/hero_bg_optimized.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Blue Bird Pictures Studio",
+        },
+      ],
+      locale: locale === "th" ? "th_TH" : locale === "ja" ? "ja_JP" : "en_US",
+      type: "website",
+    },
+  };
 }
 
 export default async function Home(props: { params: Promise<{ locale: string }> }) {

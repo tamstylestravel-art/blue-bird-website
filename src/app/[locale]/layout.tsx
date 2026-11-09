@@ -21,7 +21,11 @@ const k2d = K2D({
   variable: '--font-k2d',
 });
 
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.bluebirdpicturesstudio.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: "Blue Bird Pictures Studio",
   description: "The ultimate Premiere Pro extension for seamless workflow.",
 };

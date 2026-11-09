@@ -1,15 +1,39 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link, routing } from "@/i18n/routing";
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.bluebirdpicturesstudio.com";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata(props: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "Privacy" });
+  const title = t("title") + " | Blue Bird Pictures Studio";
+  const description =
+    locale === "th"
+      ? "นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล Blue Bird Pictures Studio"
+      : locale === "ja"
+      ? "Blue Bird Pictures Studio のプライバシーポリシー"
+      : "Privacy policy and data protection guidelines of Blue Bird Pictures Studio.";
+
   return {
-    title: t("title") + " | Blue Bird Pictures Studio",
+    metadataBase: new URL(BASE_URL),
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/privacy`,
+      languages: {
+        th: "/th/privacy",
+        en: "/en/privacy",
+        ja: "/ja/privacy",
+      },
+    },
   };
 }
 
